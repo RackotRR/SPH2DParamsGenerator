@@ -5,4 +5,5 @@ Params generator GUI for my SPH2D project
 Here you can fill in params for your experiment. 
 
 Press **Generate project** to create consistent Params file for particle generation and simulation. 
+
 Press **Open as template** to load existing Params.json as template.
