@@ -9,6 +9,8 @@ namespace SPH2DParamsGenerator
     public partial class Form1 : Form
     {
         string LastFolderOpened = null;
+        const uint TargetParamsVersionMajor = 2;
+        const uint TargetParamsVersionMinor = 9;
 
         public Form1()
         {
@@ -474,6 +476,23 @@ namespace SPH2DParamsGenerator
                 var experimentParams = JsonSerializer.Deserialize<ExperimentParams>(stream);
                 if (experimentParams != null)
                 {
+                    bool majorLess = experimentParams.version_major < TargetParamsVersionMajor;
+                    bool majorEqual = experimentParams.version_major == TargetParamsVersionMajor;
+                    bool minorLess = experimentParams.version_minor < TargetParamsVersionMinor;
+                    if (majorLess || (majorEqual && minorLess))
+                    {
+                        DialogResult result = MessageBox.Show(
+                            "Expected higher params version. Try to parse parameters anyway?", 
+                            "Warning", 
+                            MessageBoxButtons.YesNo, 
+                            MessageBoxIcon.Warning);
+
+                        if (result == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+
                     LoadGeometry(experimentParams);
                     LoadArtificialViscosity(experimentParams);
                     LoadAverageVelocity(experimentParams);
