@@ -81,16 +81,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExperimentParams.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="SPH2DParamsGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="SPH2DParamsGeneratorForm.Designer.cs">
+      <DependentUpon>SPH2DParamsGeneratorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="SPH2DParamsGeneratorForm.resx">
+      <DependentUpon>SPH2DParamsGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

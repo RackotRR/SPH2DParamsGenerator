@@ -54,6 +54,7 @@ namespace SPH2DParamsGenerator
         public bool waves_generator { get; set; }
         public uint boundary_layers_num { get; set; }
         public uint sbt { get; set; }
+        public bool use_chess_order { get; set; }
         public float hsml { get; set; }
         public float delta { get; set; }
         public float boundary_delta { get; set; }

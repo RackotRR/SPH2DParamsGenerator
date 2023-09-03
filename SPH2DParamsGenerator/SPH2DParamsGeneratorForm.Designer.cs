@@ -119,6 +119,7 @@
             this.label34 = new System.Windows.Forms.Label();
             this.textBox_ExperimentName = new System.Windows.Forms.TextBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.checkBox_BoundaryUseChessOrder = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -497,6 +498,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.checkBox_BoundaryUseChessOrder);
             this.groupBox6.Controls.Add(this.textBox_BoundaryLayersNum);
             this.groupBox6.Controls.Add(this.label31);
             this.groupBox6.Controls.Add(this.textBox_BoundaryDelta);
@@ -663,7 +665,7 @@
             this.groupBox8.Controls.Add(this.label22);
             this.groupBox8.Location = new System.Drawing.Point(282, 208);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(129, 192);
+            this.groupBox8.Size = new System.Drawing.Size(129, 89);
             this.groupBox8.TabIndex = 14;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Dynamic Viscosity";
@@ -1010,6 +1012,16 @@
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Experiment";
             // 
+            // checkBox_BoundaryUseChessOrder
+            // 
+            this.checkBox_BoundaryUseChessOrder.AutoSize = true;
+            this.checkBox_BoundaryUseChessOrder.Location = new System.Drawing.Point(4, 150);
+            this.checkBox_BoundaryUseChessOrder.Name = "checkBox_BoundaryUseChessOrder";
+            this.checkBox_BoundaryUseChessOrder.Size = new System.Drawing.Size(103, 17);
+            this.checkBox_BoundaryUseChessOrder.TabIndex = 24;
+            this.checkBox_BoundaryUseChessOrder.Text = "Use chess order";
+            this.checkBox_BoundaryUseChessOrder.UseVisualStyleBackColor = true;
+            // 
             // SPH2DParamsGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1151,6 +1163,7 @@
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.CheckBox checkBox_ExtraCheckConsistency;
         private System.Windows.Forms.CheckBox checkBox_ExtraInconsistentStop;
+        private System.Windows.Forms.CheckBox checkBox_BoundaryUseChessOrder;
     }
 }
 

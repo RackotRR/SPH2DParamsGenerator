@@ -10,13 +10,15 @@ namespace SPH2DParamsGenerator
     {
         string LastFolderOpened = null;
         const uint TargetParamsVersionMajor = 2;
-        const uint TargetParamsVersionMinor = 9;
+        const uint TargetParamsVersionMinor = 10;
 
         public SPH2DParamsGeneratorForm()
         {
             InitializeComponent();
 
             Setup();
+            Text = string.Format("Simulation properties generator v{0}.{1}", 
+                TargetParamsVersionMajor, TargetParamsVersionMinor);
         }
 
         void Setup()
@@ -113,7 +115,10 @@ namespace SPH2DParamsGenerator
         }
         void UpdateBoundaries()
         {
-            textBox_BoundaryLayersNum.Enabled = comboBox_ParticlesGenerator.SelectedIndex == 0;
+            bool usePicGen = comboBox_ParticlesGenerator.SelectedIndex == 1;
+            textBox_BoundaryLayersNum.Enabled = !usePicGen;
+            textBox_BoundaryDelta.Enabled = !usePicGen;
+            checkBox_BoundaryUseChessOrder.Enabled = usePicGen;
         }
 
         void SetupTimeIntegration()
@@ -259,13 +264,16 @@ namespace SPH2DParamsGenerator
         {
             if (comboBox_ParticlesGenerator.SelectedIndex == 0)
             {
+                experimentParams.boundary_delta = experimentParams.delta * float.Parse(textBox_BoundaryDelta.Text);
                 experimentParams.boundary_layers_num = uint.Parse(textBox_BoundaryLayersNum.Text);
+                experimentParams.use_chess_order = false;
             }
             else
             {
+                experimentParams.boundary_delta = 0;
                 experimentParams.boundary_layers_num = 0;
+                experimentParams.use_chess_order = checkBox_BoundaryUseChessOrder.Checked;
             }
-            experimentParams.boundary_delta = experimentParams.delta * float.Parse(textBox_BoundaryDelta.Text);
             experimentParams.sbt = (uint)comboBox_BoundaryTreat.SelectedIndex;
         }
         void FillInTimeIntegration(ExperimentParams experimentParams)
@@ -505,6 +513,7 @@ namespace SPH2DParamsGenerator
             comboBox_BoundaryTreat.SelectedIndex = (int)experimentParams.sbt;
             textBox_BoundaryDelta.Text = (experimentParams.boundary_delta / experimentParams.delta).ToString();
             textBox_BoundaryLayersNum.Text = experimentParams.boundary_layers_num.ToString();
+            checkBox_BoundaryUseChessOrder.Checked = experimentParams.use_chess_order;
         }
         void LoadWavesGenerator(ExperimentParams experimentParams)
         {
