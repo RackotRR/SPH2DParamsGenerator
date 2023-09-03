@@ -28,7 +28,6 @@ namespace SPH2DParamsGenerator
         public uint nfluid { get; set; }
         public uint nvirt { get; set; }
         public uint ntotal { get; set; }
-        public uint fluid_particles_per_d { get; set; }
         public float wave_length { get; set; }
         public float depth { get; set; }
         public float freq { get; set; }

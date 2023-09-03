@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace SPH2DParamsGenerator
 {
-    public partial class Form1 : Form
+    public partial class SPH2DParamsGeneratorForm : Form
     {
         string LastFolderOpened = null;
         const uint TargetParamsVersionMajor = 2;
         const uint TargetParamsVersionMinor = 9;
 
-        public Form1()
+        public SPH2DParamsGeneratorForm()
         {
             InitializeComponent();
 
@@ -21,12 +21,6 @@ namespace SPH2DParamsGenerator
 
         void Setup()
         {
-            comboBox_ParticlesGenerator.Items.Clear();
-            comboBox_ParticlesGenerator.Items.Add("None");
-            comboBox_ParticlesGenerator.Items.Add("SPH2DPicGen");
-            comboBox_ParticlesGenerator.SelectedIndex = 1;
-            comboBox_ParticlesGenerator.DropDownStyle = ComboBoxStyle.DropDownList;
-
             SetupAverageVelocity();
             SetupArtificialViscosity();
             SetupDynamicViscosity();
@@ -35,6 +29,9 @@ namespace SPH2DParamsGenerator
             SetupTimeIntegration();
             SetupDensity();
             SetupInternalForce();
+            UpdateExtra();
+            UpdateTimeStep();
+            SetupExperiment();
         }
 
         void SetupSKFItems(ComboBox.ObjectCollection comboBoxItems)
@@ -170,6 +167,25 @@ namespace SPH2DParamsGenerator
             comboBox_IntForceSKF.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
+        void UpdateTimeStep()
+        {
+            textBox_StepCheck.Enabled = checkBox_ExtraCheckConsistency.Checked;
+        }
+
+        void UpdateExtra()
+        {
+            checkBox_ExtraInconsistentStop.Enabled = checkBox_ExtraCheckConsistency.Checked;
+        }
+        
+        void SetupExperiment()
+        {
+            comboBox_ParticlesGenerator.Items.Clear();
+            comboBox_ParticlesGenerator.Items.Add("None");
+            comboBox_ParticlesGenerator.Items.Add("SPH2DPicGen");
+            comboBox_ParticlesGenerator.SelectedIndex = 1;
+            comboBox_ParticlesGenerator.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
         void FillInArtificialViscosity(ExperimentParams experimentParams)
         {
             experimentParams.artificial_viscosity = checkBox_EnableArtVisc.Checked;
@@ -301,21 +317,12 @@ namespace SPH2DParamsGenerator
                 experimentParams.cell_scale_k = 2;
             }
         }
-        string GetParamsFileName()
+        void FillInExtra(ExperimentParams experimentParams)
         {
-            string filename;
-
-            var target_particles_generator = comboBox_ParticlesGenerator.SelectedIndex;
-            if (target_particles_generator == 1)
-            {
-                filename = "SPH2DPicGenParams.json";
-            }
-            else
-            {
-                filename = "Params.json";
-            }
-
-            return filename;
+            experimentParams.enable_check_consistency = checkBox_ExtraCheckConsistency.Checked;
+            experimentParams.inf_stop = experimentParams.enable_check_consistency && checkBox_ExtraInconsistentStop.Checked;
+            experimentParams.local_threads = uint.Parse(textBox_ExtraLocalThreads.Text);
+            experimentParams.max_neighbours = uint.Parse(textBox_ExtraMaxNeighbours.Text);
         }
         void FillInDefaultParams(ExperimentParams experimentParams)
         {
@@ -323,19 +330,15 @@ namespace SPH2DParamsGenerator
             experimentParams.TYPE_BOUNDARY = -2;
             experimentParams.TYPE_NON_EXISTENT = 0;
             experimentParams.TYPE_WATER = 2;
-            experimentParams.enable_check_consistency = true;
-            experimentParams.inf_stop = true;
             experimentParams.g = 9.8100004196167f;
             experimentParams.pi = 3.1415927410125732f;
 
             experimentParams.depth = 0;
             experimentParams.beach_x = 0;
-            experimentParams.fluid_particles_per_d = 0;
             experimentParams.left_wall_start = 0;
             experimentParams.left_wall_end = 0;
             experimentParams.local_threads = 0;
             experimentParams.max_cells = 0;
-            experimentParams.max_neighbours = 0;
             experimentParams.maxn = 0;
             experimentParams.nfluid = 0;
             experimentParams.nvirt = 0;
@@ -356,9 +359,46 @@ namespace SPH2DParamsGenerator
             experimentParams.piston_amp = 0;
             experimentParams.maxtimestep = 0;
         }
-        void GenerateSimulationProperies(string directory)
+        string GetParamsFileName()
         {
-            ExperimentParams experimentParams = new ExperimentParams();
+            string filename;
+
+            var target_particles_generator = comboBox_ParticlesGenerator.SelectedIndex;
+            if (target_particles_generator == 1)
+            {
+                filename = "SPH2DPicGenParams.json";
+            }
+            else
+            {
+                filename = "Params.json";
+            }
+
+            return filename;
+        }
+        string FindExperimentDirectory(string directory)
+        {
+            if (!Directory.Exists(directory))
+            {
+                return directory;
+            }
+
+            int index = directory.LastIndexOf('_');
+            if (index + 3 == directory.Length)
+            {
+                string numberStr = directory.Substring(index + 1);
+                uint number;
+                if (uint.TryParse(numberStr, out number))
+                {
+                    string nextExperimentName = directory.Substring(0, index + 1) + (number + 1).ToString("D2");
+                    return FindExperimentDirectory(nextExperimentName);
+                }
+            }
+
+            return FindExperimentDirectory(directory + "_01");
+        }
+        ExperimentParams GenerateExperimentParams()
+        {
+            var experimentParams = new ExperimentParams();
 
             FillInArtificialViscosity(experimentParams);
             FillInAverageVelocity(experimentParams);
@@ -370,19 +410,50 @@ namespace SPH2DParamsGenerator
             FillInTimeStep(experimentParams);
             FillInTimeIntegration(experimentParams);
             FillInViscosity(experimentParams);
+            FillInExtra(experimentParams);
             FillInDefaultParams(experimentParams);
 
             FillInCellScaleK(experimentParams);
 
-            experimentParams.experiment_name = Path.GetFileName(directory);
+            experimentParams.experiment_name = textBox_ExperimentName.Text;
             experimentParams.format_line = "";
             experimentParams.version_major = 0;
             experimentParams.version_minor = 0;
 
-            string path = Path.Combine(directory, GetParamsFileName());
+            return experimentParams;
+        }
+        void GenerateProject(string directory)
+        {
+            string dir = Path.Combine(directory, textBox_ExperimentName.Text);
+            if (Directory.Exists(dir))
+            {
+                DialogResult result = MessageBox.Show(
+                    "Experiment directory already exists. Override experiment?", 
+                    "Warning", 
+                    MessageBoxButtons.YesNoCancel, 
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    Directory.Delete(dir, true);
+                }
+                else if (result == DialogResult.No)
+                {
+                    dir = FindExperimentDirectory(dir);
+                    textBox_ExperimentName.Text = Path.GetFileName(dir);
+                }
+            }
+            Directory.CreateDirectory(dir);
+
+            string path = Path.Combine(dir, GetParamsFileName());
             using (var stream = File.OpenWrite(path))
             {
                 var options = new JsonSerializerOptions { WriteIndented = true };
+                var experimentParams = GenerateExperimentParams();
                 JsonSerializer.Serialize(stream, experimentParams, options);
             }
         }
@@ -469,6 +540,13 @@ namespace SPH2DParamsGenerator
             textBox_StepEstimate.Text = experimentParams.print_time_est_step.ToString();
             textBox_StepCheck.Text = experimentParams.normal_check_step.ToString();
         }
+        void LoadExtra(ExperimentParams experimentParams)
+        {
+            checkBox_ExtraCheckConsistency.Checked = experimentParams.enable_check_consistency;
+            checkBox_ExtraInconsistentStop.Checked = experimentParams.inf_stop;
+            textBox_ExtraLocalThreads.Text = experimentParams.local_threads.ToString();
+            textBox_ExtraMaxNeighbours.Text = experimentParams.max_neighbours.ToString();
+        }
         void LoadTemplate(string filename)
         {
             using (var stream = File.OpenRead(filename))
@@ -503,6 +581,7 @@ namespace SPH2DParamsGenerator
                     LoadDynamicViscosity(experimentParams);
                     LoadTimeIntegration(experimentParams);
                     LoadTimeStep(experimentParams);
+                    LoadExtra(experimentParams);
                 }
             }
         }
@@ -549,7 +628,7 @@ namespace SPH2DParamsGenerator
                     LastFolderOpened = dialog.FileName;
                     try
                     {
-                        GenerateSimulationProperies(dialog.FileName);
+                        GenerateProject(dialog.FileName);
                     }
                     catch (Exception ex)
                     {
@@ -584,6 +663,12 @@ namespace SPH2DParamsGenerator
                     }
                 }
             }
+        }
+
+        private void checkBox_ExtraCheckConsistency_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateExtra();
+            UpdateTimeStep();
         }
     }
 }

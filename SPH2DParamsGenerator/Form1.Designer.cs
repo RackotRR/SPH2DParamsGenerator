@@ -1,6 +1,6 @@
 ﻿namespace SPH2DParamsGenerator
 {
-    partial class Form1
+    partial class SPH2DParamsGeneratorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -111,6 +111,16 @@
             this.label32 = new System.Windows.Forms.Label();
             this.comboBox_ParticlesGenerator = new System.Windows.Forms.ComboBox();
             this.button_OpenAsTemplate = new System.Windows.Forms.Button();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.textBox_ExtraMaxNeighbours = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.textBox_ExtraLocalThreads = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.textBox_ExperimentName = new System.Windows.Forms.TextBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.checkBox_ExtraCheckConsistency = new System.Windows.Forms.CheckBox();
+            this.checkBox_ExtraInconsistentStop = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -121,6 +131,8 @@
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -877,9 +889,9 @@
             // 
             // button_GenerateProject
             // 
-            this.button_GenerateProject.Location = new System.Drawing.Point(278, 395);
+            this.button_GenerateProject.Location = new System.Drawing.Point(0, 170);
             this.button_GenerateProject.Name = "button_GenerateProject";
-            this.button_GenerateProject.Size = new System.Drawing.Size(133, 46);
+            this.button_GenerateProject.Size = new System.Drawing.Size(129, 69);
             this.button_GenerateProject.TabIndex = 36;
             this.button_GenerateProject.Text = "Generate project";
             this.button_GenerateProject.UseVisualStyleBackColor = true;
@@ -888,7 +900,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(283, 300);
+            this.label32.Location = new System.Drawing.Point(6, 17);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(95, 13);
             this.label32.TabIndex = 37;
@@ -897,31 +909,135 @@
             // comboBox_ParticlesGenerator
             // 
             this.comboBox_ParticlesGenerator.FormattingEnabled = true;
-            this.comboBox_ParticlesGenerator.Location = new System.Drawing.Point(282, 316);
+            this.comboBox_ParticlesGenerator.Location = new System.Drawing.Point(6, 35);
             this.comboBox_ParticlesGenerator.Name = "comboBox_ParticlesGenerator";
-            this.comboBox_ParticlesGenerator.Size = new System.Drawing.Size(133, 21);
+            this.comboBox_ParticlesGenerator.Size = new System.Drawing.Size(117, 21);
             this.comboBox_ParticlesGenerator.TabIndex = 38;
             this.comboBox_ParticlesGenerator.SelectedIndexChanged += new System.EventHandler(this.comboBox_ParticlesGenerator_SelectedIndexChanged);
             // 
             // button_OpenAsTemplate
             // 
-            this.button_OpenAsTemplate.Location = new System.Drawing.Point(278, 343);
+            this.button_OpenAsTemplate.Location = new System.Drawing.Point(0, 102);
             this.button_OpenAsTemplate.Name = "button_OpenAsTemplate";
-            this.button_OpenAsTemplate.Size = new System.Drawing.Size(133, 46);
+            this.button_OpenAsTemplate.Size = new System.Drawing.Size(129, 65);
             this.button_OpenAsTemplate.TabIndex = 39;
             this.button_OpenAsTemplate.Text = "Open as template";
             this.button_OpenAsTemplate.UseVisualStyleBackColor = true;
             this.button_OpenAsTemplate.Click += new System.EventHandler(this.button_OpenAsTemplate_Click);
             // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.checkBox_ExtraInconsistentStop);
+            this.groupBox11.Controls.Add(this.checkBox_ExtraCheckConsistency);
+            this.groupBox11.Controls.Add(this.textBox_ExtraMaxNeighbours);
+            this.groupBox11.Controls.Add(this.label36);
+            this.groupBox11.Controls.Add(this.textBox_ExtraLocalThreads);
+            this.groupBox11.Controls.Add(this.label35);
+            this.groupBox11.Location = new System.Drawing.Point(687, 12);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(129, 190);
+            this.groupBox11.TabIndex = 40;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Extra";
+            // 
+            // textBox_ExtraMaxNeighbours
+            // 
+            this.textBox_ExtraMaxNeighbours.Location = new System.Drawing.Point(6, 71);
+            this.textBox_ExtraMaxNeighbours.Name = "textBox_ExtraMaxNeighbours";
+            this.textBox_ExtraMaxNeighbours.Size = new System.Drawing.Size(117, 20);
+            this.textBox_ExtraMaxNeighbours.TabIndex = 44;
+            this.textBox_ExtraMaxNeighbours.Text = "64";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(3, 55);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(82, 13);
+            this.label36.TabIndex = 43;
+            this.label36.Text = "Max neighbours";
+            // 
+            // textBox_ExtraLocalThreads
+            // 
+            this.textBox_ExtraLocalThreads.Location = new System.Drawing.Point(6, 32);
+            this.textBox_ExtraLocalThreads.Name = "textBox_ExtraLocalThreads";
+            this.textBox_ExtraLocalThreads.Size = new System.Drawing.Size(117, 20);
+            this.textBox_ExtraLocalThreads.TabIndex = 19;
+            this.textBox_ExtraLocalThreads.Text = "16";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(3, 16);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(98, 13);
+            this.label35.TabIndex = 42;
+            this.label35.Text = "Local threads OMP";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(6, 60);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(88, 13);
+            this.label34.TabIndex = 41;
+            this.label34.Text = "Experiment name";
+            // 
+            // textBox_ExperimentName
+            // 
+            this.textBox_ExperimentName.Location = new System.Drawing.Point(6, 76);
+            this.textBox_ExperimentName.Name = "textBox_ExperimentName";
+            this.textBox_ExperimentName.Size = new System.Drawing.Size(117, 20);
+            this.textBox_ExperimentName.TabIndex = 36;
+            this.textBox_ExperimentName.Text = "default_experiment";
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.button_GenerateProject);
+            this.groupBox12.Controls.Add(this.button_OpenAsTemplate);
+            this.groupBox12.Controls.Add(this.label32);
+            this.groupBox12.Controls.Add(this.textBox_ExperimentName);
+            this.groupBox12.Controls.Add(this.label34);
+            this.groupBox12.Controls.Add(this.comboBox_ParticlesGenerator);
+            this.groupBox12.Location = new System.Drawing.Point(687, 208);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(129, 239);
+            this.groupBox12.TabIndex = 42;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Experiment";
+            // 
+            // checkBox_ExtraCheckConsistency
+            // 
+            this.checkBox_ExtraCheckConsistency.AutoSize = true;
+            this.checkBox_ExtraCheckConsistency.Checked = true;
+            this.checkBox_ExtraCheckConsistency.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_ExtraCheckConsistency.Location = new System.Drawing.Point(6, 97);
+            this.checkBox_ExtraCheckConsistency.Name = "checkBox_ExtraCheckConsistency";
+            this.checkBox_ExtraCheckConsistency.Size = new System.Drawing.Size(116, 17);
+            this.checkBox_ExtraCheckConsistency.TabIndex = 45;
+            this.checkBox_ExtraCheckConsistency.Text = "Check consistency";
+            this.checkBox_ExtraCheckConsistency.UseVisualStyleBackColor = true;
+            this.checkBox_ExtraCheckConsistency.CheckedChanged += new System.EventHandler(this.checkBox_ExtraCheckConsistency_CheckedChanged);
+            // 
+            // checkBox_ExtraInconsistentStop
+            // 
+            this.checkBox_ExtraInconsistentStop.AutoSize = true;
+            this.checkBox_ExtraInconsistentStop.Checked = true;
+            this.checkBox_ExtraInconsistentStop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_ExtraInconsistentStop.Location = new System.Drawing.Point(6, 120);
+            this.checkBox_ExtraInconsistentStop.Name = "checkBox_ExtraInconsistentStop";
+            this.checkBox_ExtraInconsistentStop.Size = new System.Drawing.Size(106, 17);
+            this.checkBox_ExtraInconsistentStop.TabIndex = 46;
+            this.checkBox_ExtraInconsistentStop.Text = "Inconsistent stop";
+            this.checkBox_ExtraInconsistentStop.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 453);
-            this.Controls.Add(this.button_OpenAsTemplate);
-            this.Controls.Add(this.comboBox_ParticlesGenerator);
-            this.Controls.Add(this.label32);
-            this.Controls.Add(this.button_GenerateProject);
+            this.ClientSize = new System.Drawing.Size(823, 453);
+            this.Controls.Add(this.groupBox12);
+            this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox4);
@@ -956,8 +1072,11 @@
             this.groupBox9.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1045,6 +1164,16 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.ComboBox comboBox_ParticlesGenerator;
         private System.Windows.Forms.Button button_OpenAsTemplate;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.TextBox textBox_ExtraMaxNeighbours;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox textBox_ExtraLocalThreads;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox textBox_ExperimentName;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.CheckBox checkBox_ExtraCheckConsistency;
+        private System.Windows.Forms.CheckBox checkBox_ExtraInconsistentStop;
     }
 }
 
