@@ -197,7 +197,7 @@ namespace SPH2DParamsGenerator
             {
                 experimentParams.artificial_bulk_visc = float.Parse(textBox_ArtViscBulk.Text);
                 experimentParams.artificial_shear_visc = float.Parse(textBox_ArtViscShear.Text);
-                experimentParams.artificial_viscosity_skf = (uint)comboBox_ArtViscSKF.SelectedIndex;
+                experimentParams.artificial_viscosity_skf = (uint)(comboBox_ArtViscSKF.SelectedIndex + 1);
             }
             else
             {
@@ -212,7 +212,7 @@ namespace SPH2DParamsGenerator
             if (experimentParams.average_velocity)
             {
                 experimentParams.average_velocity_epsilon = float.Parse(textBox_AvVelCoef.Text);
-                experimentParams.average_velocity_skf = (uint)comboBox_AvVelSKF.SelectedIndex;
+                experimentParams.average_velocity_skf = (uint)(comboBox_AvVelSKF.SelectedIndex + 1);
             }
             else
             {
@@ -223,15 +223,17 @@ namespace SPH2DParamsGenerator
         void FillInDensity(ExperimentParams experimentParams)
         {
             experimentParams.summation_density = comboBox_DensityTreat.SelectedIndex == 0;
-            experimentParams.density_skf = (uint)comboBox_DensitySKF.SelectedIndex;
-            experimentParams.mass = (float)Math.Pow(float.Parse(textBox_GeomDelta.Text), 2) * float.Parse(textBox_DensityValue.Text);
+            experimentParams.density_skf = (uint)(comboBox_DensitySKF.SelectedIndex + 1);
+            const int dim = 2;
+            float delta = float.Parse(textBox_GeomDelta.Text);
+            experimentParams.mass = (float)Math.Pow(delta, dim) * float.Parse(textBox_DensityValue.Text);
             experimentParams.nor_density = checkBox_DensityNorm.Checked;
         }
         void FillInInternalForce(ExperimentParams experimentParams)
         {
             experimentParams.eos_csqr_k = float.Parse(textBox_IntForceSoundVelCoef.Text);
-            experimentParams.int_force_skf = (uint)comboBox_IntForceSKF.SelectedIndex;
-            experimentParams.pa_sph = (uint)comboBox_IntForceTreat.SelectedIndex;
+            experimentParams.int_force_skf = (uint)(comboBox_IntForceSKF.SelectedIndex + 1);
+            experimentParams.pa_sph = (uint)(comboBox_IntForceTreat.SelectedIndex + 1);
         }
         void FillInGeometry(ExperimentParams experimentParams)
         {
@@ -283,10 +285,12 @@ namespace SPH2DParamsGenerator
             if (comboBox_TimeTreat.SelectedIndex == 0)
             {
                 experimentParams.dt = float.Parse(textBox_TimeDT.Text);
+                experimentParams.CFL_coef = 0;
             }
             else
             {
                 experimentParams.dt = 0;
+                experimentParams.CFL_coef = float.Parse(textBox_TimeCFL.Text);
             }
         }
         void FillInTimeStep(ExperimentParams experimentParams)
@@ -505,7 +509,7 @@ namespace SPH2DParamsGenerator
             }
 
             comboBox_DensitySKF.SelectedIndex = (int)(experimentParams.density_skf - 1);
-            textBox_DensityValue.Text = experimentParams.mass.ToString();
+            textBox_DensityValue.Text = (experimentParams.mass / Math.Pow(experimentParams.delta, experimentParams.dim)).ToString();
             checkBox_DensityNorm.Checked = experimentParams.nor_density;
         }
         void LoadBoundaries(ExperimentParams experimentParams)
@@ -591,6 +595,8 @@ namespace SPH2DParamsGenerator
                     LoadTimeIntegration(experimentParams);
                     LoadTimeStep(experimentParams);
                     LoadExtra(experimentParams);
+
+                    textBox_ExperimentName.Text = experimentParams.experiment_name;
                 }
             }
         }
