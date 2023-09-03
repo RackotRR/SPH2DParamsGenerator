@@ -97,7 +97,6 @@ namespace SPH2DParamsGenerator
         {
             bool enabled = checkBox_EnableWavesGen.Checked;
             comboBox_WavesGenTreat.Enabled = enabled;
-            textBox_WavesGenFreq.Enabled = enabled;
             textBox_WavesGenLen.Enabled = enabled;
             textBox_WavesGenMagnitude.Enabled = enabled;
             textBox_WavesGenTimeWait.Enabled = enabled;
@@ -242,7 +241,6 @@ namespace SPH2DParamsGenerator
             if (experimentParams.waves_generator)
             {
                 experimentParams.nwm = (uint)comboBox_WavesGenTreat.SelectedIndex;
-                experimentParams.freq = float.Parse(textBox_WavesGenFreq.Text);
                 experimentParams.generator_time_wait = float.Parse(textBox_WavesGenTimeWait.Text);
                 experimentParams.wave_amp = float.Parse(textBox_WavesGenMagnitude.Text);
                 experimentParams.wave_length = float.Parse(textBox_WavesGenLen.Text);
@@ -251,7 +249,6 @@ namespace SPH2DParamsGenerator
             else
             {
                 experimentParams.nwm = 0;
-                experimentParams.freq = 0;
                 experimentParams.generator_time_wait = 0;
                 experimentParams.wave_amp = 0;
                 experimentParams.wave_length = 0;
@@ -335,6 +332,7 @@ namespace SPH2DParamsGenerator
 
             experimentParams.depth = 0;
             experimentParams.beach_x = 0;
+            experimentParams.freq = 0;
             experimentParams.left_wall_start = 0;
             experimentParams.left_wall_end = 0;
             experimentParams.local_threads = 0;
@@ -400,6 +398,7 @@ namespace SPH2DParamsGenerator
         {
             var experimentParams = new ExperimentParams();
 
+            FillInDefaultParams(experimentParams);
             FillInArtificialViscosity(experimentParams);
             FillInAverageVelocity(experimentParams);
             FillInDensity(experimentParams);
@@ -411,14 +410,16 @@ namespace SPH2DParamsGenerator
             FillInTimeIntegration(experimentParams);
             FillInViscosity(experimentParams);
             FillInExtra(experimentParams);
-            FillInDefaultParams(experimentParams);
 
             FillInCellScaleK(experimentParams);
 
             experimentParams.experiment_name = textBox_ExperimentName.Text;
             experimentParams.format_line = "";
-            experimentParams.version_major = 0;
-            experimentParams.version_minor = 0;
+            experimentParams.version_major = TargetParamsVersionMajor;
+            experimentParams.version_minor = TargetParamsVersionMinor;
+            experimentParams.SPH2D_version_major = 0;
+            experimentParams.SPH2D_version_minor = 0;
+            experimentParams.SPH2D_version_patch = 0;
 
             return experimentParams;
         }
@@ -516,7 +517,6 @@ namespace SPH2DParamsGenerator
             {
                 comboBox_WavesGenTreat.SelectedIndex = (int)(experimentParams.nwm - 1);
             }
-            textBox_WavesGenFreq.Text = experimentParams.freq.ToString();
             textBox_WavesGenLen.Text = experimentParams.wave_length.ToString();
             textBox_WavesGenMagnitude.Text = experimentParams.wave_amp.ToString();
             textBox_WavesGenTimeWait.Text = experimentParams.generator_time_wait.ToString();

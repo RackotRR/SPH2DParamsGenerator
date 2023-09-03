@@ -82,8 +82,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.checkBox_EnableWavesGen = new System.Windows.Forms.CheckBox();
             this.comboBox_WavesGenTreat = new System.Windows.Forms.ComboBox();
-            this.textBox_WavesGenFreq = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.checkBox_EnableDynVisc = new System.Windows.Forms.CheckBox();
@@ -112,6 +110,8 @@
             this.comboBox_ParticlesGenerator = new System.Windows.Forms.ComboBox();
             this.button_OpenAsTemplate = new System.Windows.Forms.Button();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.checkBox_ExtraInconsistentStop = new System.Windows.Forms.CheckBox();
+            this.checkBox_ExtraCheckConsistency = new System.Windows.Forms.CheckBox();
             this.textBox_ExtraMaxNeighbours = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.textBox_ExtraLocalThreads = new System.Windows.Forms.TextBox();
@@ -119,8 +119,6 @@
             this.label34 = new System.Windows.Forms.Label();
             this.textBox_ExperimentName = new System.Windows.Forms.TextBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.checkBox_ExtraCheckConsistency = new System.Windows.Forms.CheckBox();
-            this.checkBox_ExtraInconsistentStop = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -507,7 +505,7 @@
             this.groupBox6.Controls.Add(this.label18);
             this.groupBox6.Location = new System.Drawing.Point(12, 208);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(129, 239);
+            this.groupBox6.Size = new System.Drawing.Size(129, 192);
             this.groupBox6.TabIndex = 11;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Boundaries";
@@ -572,19 +570,17 @@
             this.groupBox7.Controls.Add(this.label14);
             this.groupBox7.Controls.Add(this.checkBox_EnableWavesGen);
             this.groupBox7.Controls.Add(this.comboBox_WavesGenTreat);
-            this.groupBox7.Controls.Add(this.textBox_WavesGenFreq);
-            this.groupBox7.Controls.Add(this.label19);
             this.groupBox7.Controls.Add(this.label20);
             this.groupBox7.Location = new System.Drawing.Point(147, 208);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(129, 239);
+            this.groupBox7.Size = new System.Drawing.Size(129, 192);
             this.groupBox7.TabIndex = 13;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Waves Generator";
             // 
             // textBox_WavesGenTimeWait
             // 
-            this.textBox_WavesGenTimeWait.Location = new System.Drawing.Point(4, 209);
+            this.textBox_WavesGenTimeWait.Location = new System.Drawing.Point(4, 170);
             this.textBox_WavesGenTimeWait.Name = "textBox_WavesGenTimeWait";
             this.textBox_WavesGenTimeWait.Size = new System.Drawing.Size(121, 20);
             this.textBox_WavesGenTimeWait.TabIndex = 27;
@@ -593,7 +589,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(3, 193);
+            this.label33.Location = new System.Drawing.Point(6, 154);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(98, 13);
             this.label33.TabIndex = 26;
@@ -601,7 +597,7 @@
             // 
             // textBox_WavesGenMagnitude
             // 
-            this.textBox_WavesGenMagnitude.Location = new System.Drawing.Point(4, 170);
+            this.textBox_WavesGenMagnitude.Location = new System.Drawing.Point(4, 131);
             this.textBox_WavesGenMagnitude.Name = "textBox_WavesGenMagnitude";
             this.textBox_WavesGenMagnitude.Size = new System.Drawing.Size(121, 20);
             this.textBox_WavesGenMagnitude.TabIndex = 25;
@@ -610,7 +606,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(4, 154);
+            this.label21.Location = new System.Drawing.Point(6, 115);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(88, 13);
             this.label21.TabIndex = 13;
@@ -618,7 +614,7 @@
             // 
             // textBox_WavesGenLen
             // 
-            this.textBox_WavesGenLen.Location = new System.Drawing.Point(4, 131);
+            this.textBox_WavesGenLen.Location = new System.Drawing.Point(4, 92);
             this.textBox_WavesGenLen.Name = "textBox_WavesGenLen";
             this.textBox_WavesGenLen.Size = new System.Drawing.Size(121, 20);
             this.textBox_WavesGenLen.TabIndex = 24;
@@ -627,7 +623,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(4, 115);
+            this.label14.Location = new System.Drawing.Point(6, 76);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(68, 13);
             this.label14.TabIndex = 11;
@@ -651,23 +647,6 @@
             this.comboBox_WavesGenTreat.Size = new System.Drawing.Size(121, 21);
             this.comboBox_WavesGenTreat.TabIndex = 22;
             // 
-            // textBox_WavesGenFreq
-            // 
-            this.textBox_WavesGenFreq.Location = new System.Drawing.Point(4, 92);
-            this.textBox_WavesGenFreq.Name = "textBox_WavesGenFreq";
-            this.textBox_WavesGenFreq.Size = new System.Drawing.Size(121, 20);
-            this.textBox_WavesGenFreq.TabIndex = 23;
-            this.textBox_WavesGenFreq.Text = "0";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(4, 76);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(91, 13);
-            this.label19.TabIndex = 4;
-            this.label19.Text = "Waves frequency";
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -684,7 +663,7 @@
             this.groupBox8.Controls.Add(this.label22);
             this.groupBox8.Location = new System.Drawing.Point(282, 208);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(129, 89);
+            this.groupBox8.Size = new System.Drawing.Size(129, 192);
             this.groupBox8.TabIndex = 14;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Dynamic Viscosity";
@@ -729,7 +708,7 @@
             this.groupBox9.Controls.Add(this.label24);
             this.groupBox9.Location = new System.Drawing.Point(417, 208);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(129, 239);
+            this.groupBox9.Size = new System.Drawing.Size(129, 192);
             this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Time integration";
@@ -814,7 +793,7 @@
             this.groupBox10.Controls.Add(this.label30);
             this.groupBox10.Location = new System.Drawing.Point(552, 208);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(129, 239);
+            this.groupBox10.Size = new System.Drawing.Size(129, 192);
             this.groupBox10.TabIndex = 15;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Time step";
@@ -889,9 +868,9 @@
             // 
             // button_GenerateProject
             // 
-            this.button_GenerateProject.Location = new System.Drawing.Point(0, 170);
+            this.button_GenerateProject.Location = new System.Drawing.Point(0, 150);
             this.button_GenerateProject.Name = "button_GenerateProject";
-            this.button_GenerateProject.Size = new System.Drawing.Size(129, 69);
+            this.button_GenerateProject.Size = new System.Drawing.Size(129, 42);
             this.button_GenerateProject.TabIndex = 36;
             this.button_GenerateProject.Text = "Generate project";
             this.button_GenerateProject.UseVisualStyleBackColor = true;
@@ -919,7 +898,7 @@
             // 
             this.button_OpenAsTemplate.Location = new System.Drawing.Point(0, 102);
             this.button_OpenAsTemplate.Name = "button_OpenAsTemplate";
-            this.button_OpenAsTemplate.Size = new System.Drawing.Size(129, 65);
+            this.button_OpenAsTemplate.Size = new System.Drawing.Size(129, 42);
             this.button_OpenAsTemplate.TabIndex = 39;
             this.button_OpenAsTemplate.Text = "Open as template";
             this.button_OpenAsTemplate.UseVisualStyleBackColor = true;
@@ -939,6 +918,31 @@
             this.groupBox11.TabIndex = 40;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Extra";
+            // 
+            // checkBox_ExtraInconsistentStop
+            // 
+            this.checkBox_ExtraInconsistentStop.AutoSize = true;
+            this.checkBox_ExtraInconsistentStop.Checked = true;
+            this.checkBox_ExtraInconsistentStop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_ExtraInconsistentStop.Location = new System.Drawing.Point(6, 120);
+            this.checkBox_ExtraInconsistentStop.Name = "checkBox_ExtraInconsistentStop";
+            this.checkBox_ExtraInconsistentStop.Size = new System.Drawing.Size(106, 17);
+            this.checkBox_ExtraInconsistentStop.TabIndex = 46;
+            this.checkBox_ExtraInconsistentStop.Text = "Inconsistent stop";
+            this.checkBox_ExtraInconsistentStop.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_ExtraCheckConsistency
+            // 
+            this.checkBox_ExtraCheckConsistency.AutoSize = true;
+            this.checkBox_ExtraCheckConsistency.Checked = true;
+            this.checkBox_ExtraCheckConsistency.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_ExtraCheckConsistency.Location = new System.Drawing.Point(6, 97);
+            this.checkBox_ExtraCheckConsistency.Name = "checkBox_ExtraCheckConsistency";
+            this.checkBox_ExtraCheckConsistency.Size = new System.Drawing.Size(116, 17);
+            this.checkBox_ExtraCheckConsistency.TabIndex = 45;
+            this.checkBox_ExtraCheckConsistency.Text = "Check consistency";
+            this.checkBox_ExtraCheckConsistency.UseVisualStyleBackColor = true;
+            this.checkBox_ExtraCheckConsistency.CheckedChanged += new System.EventHandler(this.checkBox_ExtraCheckConsistency_CheckedChanged);
             // 
             // textBox_ExtraMaxNeighbours
             // 
@@ -1001,41 +1005,16 @@
             this.groupBox12.Controls.Add(this.comboBox_ParticlesGenerator);
             this.groupBox12.Location = new System.Drawing.Point(687, 208);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(129, 239);
+            this.groupBox12.Size = new System.Drawing.Size(129, 192);
             this.groupBox12.TabIndex = 42;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Experiment";
             // 
-            // checkBox_ExtraCheckConsistency
-            // 
-            this.checkBox_ExtraCheckConsistency.AutoSize = true;
-            this.checkBox_ExtraCheckConsistency.Checked = true;
-            this.checkBox_ExtraCheckConsistency.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_ExtraCheckConsistency.Location = new System.Drawing.Point(6, 97);
-            this.checkBox_ExtraCheckConsistency.Name = "checkBox_ExtraCheckConsistency";
-            this.checkBox_ExtraCheckConsistency.Size = new System.Drawing.Size(116, 17);
-            this.checkBox_ExtraCheckConsistency.TabIndex = 45;
-            this.checkBox_ExtraCheckConsistency.Text = "Check consistency";
-            this.checkBox_ExtraCheckConsistency.UseVisualStyleBackColor = true;
-            this.checkBox_ExtraCheckConsistency.CheckedChanged += new System.EventHandler(this.checkBox_ExtraCheckConsistency_CheckedChanged);
-            // 
-            // checkBox_ExtraInconsistentStop
-            // 
-            this.checkBox_ExtraInconsistentStop.AutoSize = true;
-            this.checkBox_ExtraInconsistentStop.Checked = true;
-            this.checkBox_ExtraInconsistentStop.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_ExtraInconsistentStop.Location = new System.Drawing.Point(6, 120);
-            this.checkBox_ExtraInconsistentStop.Name = "checkBox_ExtraInconsistentStop";
-            this.checkBox_ExtraInconsistentStop.Size = new System.Drawing.Size(106, 17);
-            this.checkBox_ExtraInconsistentStop.TabIndex = 46;
-            this.checkBox_ExtraInconsistentStop.Text = "Inconsistent stop";
-            this.checkBox_ExtraInconsistentStop.UseVisualStyleBackColor = true;
-            // 
-            // Form1
+            // SPH2DParamsGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 453);
+            this.ClientSize = new System.Drawing.Size(823, 408);
             this.Controls.Add(this.groupBox12);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
@@ -1050,7 +1029,7 @@
             this.Controls.Add(this.groupBox5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "SPH2DParamsGeneratorForm";
             this.Text = "Simulation properties generator";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1117,8 +1096,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox checkBox_EnableWavesGen;
         private System.Windows.Forms.ComboBox comboBox_WavesGenTreat;
-        private System.Windows.Forms.TextBox textBox_WavesGenFreq;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox textBox_BoundaryDelta;
