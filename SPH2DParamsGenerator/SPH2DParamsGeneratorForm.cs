@@ -10,7 +10,7 @@ namespace SPH2DParamsGenerator
     {
         string LastFolderOpened = null;
         const uint TargetParamsVersionMajor = 2;
-        const uint TargetParamsVersionMinor = 10;
+        const uint TargetParamsVersionMinor = 11;
 
         public SPH2DParamsGeneratorForm()
         {
@@ -169,6 +169,25 @@ namespace SPH2DParamsGenerator
             SetupSKFItems(comboBox_IntForceSKF.Items);
             comboBox_IntForceSKF.SelectedIndex = 0;
             comboBox_IntForceSKF.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            comboBox_IntForceSoundVelMethod.Items.Clear();
+            comboBox_IntForceSoundVelMethod.Items.Add("Dam break");
+            comboBox_IntForceSoundVelMethod.Items.Add("Specific");
+            comboBox_IntForceSoundVelMethod.SelectedIndex = 0;
+            comboBox_IntForceSoundVelMethod.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            UpdateInternalForce();
+        }
+        void UpdateInternalForce()
+        {
+            if (comboBox_IntForceSoundVelMethod.SelectedIndex == 0)
+            {
+                label_IntForceSoundVelCoef.Text = "Sound velocity coef.";
+            }
+            else
+            {
+                label_IntForceSoundVelCoef.Text = "Sound velocity";
+            }
         }
 
         void UpdateTimeStep()
@@ -231,9 +250,19 @@ namespace SPH2DParamsGenerator
         }
         void FillInInternalForce(ExperimentParams experimentParams)
         {
-            experimentParams.eos_csqr_k = float.Parse(textBox_IntForceSoundVelCoef.Text);
             experimentParams.int_force_skf = (uint)(comboBox_IntForceSKF.SelectedIndex + 1);
             experimentParams.pa_sph = (uint)(comboBox_IntForceTreat.SelectedIndex + 1);
+            experimentParams.eos_sound_vel_method = (uint)(comboBox_IntForceSoundVelMethod.SelectedIndex);
+            if (experimentParams.eos_sound_vel_method == 0)
+            {
+                experimentParams.eos_csqr_k = float.Parse(textBox_IntForceSoundVel.Text);
+                experimentParams.eos_sound_vel = 0;
+            }
+            else
+            {
+                experimentParams.eos_csqr_k = 0;
+                experimentParams.eos_sound_vel = float.Parse(textBox_IntForceSoundVel.Text);
+            }
         }
         void FillInGeometry(ExperimentParams experimentParams)
         {
@@ -495,7 +524,15 @@ namespace SPH2DParamsGenerator
         {
             comboBox_IntForceSKF.SelectedIndex = (int)(experimentParams.int_force_skf - 1);
             comboBox_IntForceTreat.SelectedIndex = (int)(experimentParams.pa_sph - 1);
-            textBox_IntForceSoundVelCoef.Text = experimentParams.eos_csqr_k.ToString();
+            comboBox_IntForceSoundVelMethod.SelectedIndex = (int)(experimentParams.eos_sound_vel_method);
+            if (experimentParams.eos_sound_vel_method == 0)
+            {
+                textBox_IntForceSoundVel.Text = experimentParams.eos_csqr_k.ToString();
+            }
+            else
+            {
+                textBox_IntForceSoundVel.Text = experimentParams.eos_sound_vel.ToString();
+            }
         }
         void LoadDensity(ExperimentParams experimentParams)
         {
@@ -684,6 +721,11 @@ namespace SPH2DParamsGenerator
         {
             UpdateExtra();
             UpdateTimeStep();
+        }
+
+        private void comboBox_IntForceSoundVelMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateInternalForce();
         }
     }
 }

@@ -44,6 +44,8 @@ namespace SPH2DParamsGenerator
         public float simulation_time { get; set; }
         public uint local_threads { get; set; }
         public float eos_csqr_k { get; set; }
+        public uint eos_sound_vel_method { get; set; }
+        public float eos_sound_vel { get; set; }
         public uint pa_sph { get; set; }
         public uint density_skf { get; set; }
         public uint int_force_skf { get; set; }

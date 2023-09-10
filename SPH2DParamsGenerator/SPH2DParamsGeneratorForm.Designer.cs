@@ -38,9 +38,11 @@
             this.textBox_GeomDelta = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label_IntForceSoundVelCoef = new System.Windows.Forms.Label();
+            this.comboBox_IntForceSoundVelMethod = new System.Windows.Forms.ComboBox();
             this.comboBox_IntForceSKF = new System.Windows.Forms.ComboBox();
             this.comboBox_IntForceTreat = new System.Windows.Forms.ComboBox();
-            this.textBox_IntForceSoundVelCoef = new System.Windows.Forms.TextBox();
+            this.textBox_IntForceSoundVel = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -67,6 +69,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.checkBox_BoundaryUseChessOrder = new System.Windows.Forms.CheckBox();
             this.textBox_BoundaryLayersNum = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.textBox_BoundaryDelta = new System.Windows.Forms.TextBox();
@@ -119,7 +122,6 @@
             this.label34 = new System.Windows.Forms.Label();
             this.textBox_ExperimentName = new System.Windows.Forms.TextBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.checkBox_BoundaryUseChessOrder = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -221,9 +223,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label_IntForceSoundVelCoef);
+            this.groupBox2.Controls.Add(this.comboBox_IntForceSoundVelMethod);
             this.groupBox2.Controls.Add(this.comboBox_IntForceSKF);
             this.groupBox2.Controls.Add(this.comboBox_IntForceTreat);
-            this.groupBox2.Controls.Add(this.textBox_IntForceSoundVelCoef);
+            this.groupBox2.Controls.Add(this.textBox_IntForceSoundVel);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label8);
@@ -233,6 +237,23 @@
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Internal Force";
+            // 
+            // label_IntForceSoundVelCoef
+            // 
+            this.label_IntForceSoundVelCoef.AutoSize = true;
+            this.label_IntForceSoundVelCoef.Location = new System.Drawing.Point(4, 147);
+            this.label_IntForceSoundVelCoef.Name = "label_IntForceSoundVelCoef";
+            this.label_IntForceSoundVelCoef.Size = new System.Drawing.Size(104, 13);
+            this.label_IntForceSoundVelCoef.TabIndex = 9;
+            this.label_IntForceSoundVelCoef.Text = "Sound velocity coef.";
+            // 
+            // comboBox_IntForceSoundVelMethod
+            // 
+            this.comboBox_IntForceSoundVelMethod.Location = new System.Drawing.Point(2, 124);
+            this.comboBox_IntForceSoundVelMethod.Name = "comboBox_IntForceSoundVelMethod";
+            this.comboBox_IntForceSoundVelMethod.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_IntForceSoundVelMethod.TabIndex = 8;
+            this.comboBox_IntForceSoundVelMethod.SelectedIndexChanged += new System.EventHandler(this.comboBox_IntForceSoundVelMethod_SelectedIndexChanged);
             // 
             // comboBox_IntForceSKF
             // 
@@ -249,22 +270,22 @@
             this.comboBox_IntForceTreat.Size = new System.Drawing.Size(121, 21);
             this.comboBox_IntForceTreat.TabIndex = 5;
             // 
-            // textBox_IntForceSoundVelCoef
+            // textBox_IntForceSoundVel
             // 
-            this.textBox_IntForceSoundVelCoef.Location = new System.Drawing.Point(4, 124);
-            this.textBox_IntForceSoundVelCoef.Name = "textBox_IntForceSoundVelCoef";
-            this.textBox_IntForceSoundVelCoef.Size = new System.Drawing.Size(121, 20);
-            this.textBox_IntForceSoundVelCoef.TabIndex = 7;
-            this.textBox_IntForceSoundVelCoef.Text = "1";
+            this.textBox_IntForceSoundVel.Location = new System.Drawing.Point(4, 163);
+            this.textBox_IntForceSoundVel.Name = "textBox_IntForceSoundVel";
+            this.textBox_IntForceSoundVel.Size = new System.Drawing.Size(121, 20);
+            this.textBox_IntForceSoundVel.TabIndex = 7;
+            this.textBox_IntForceSoundVel.Text = "1";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(4, 108);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.Size = new System.Drawing.Size(115, 13);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Sound velocity coef.";
+            this.label6.Text = "Sound velocity method";
             // 
             // label7
             // 
@@ -383,7 +404,7 @@
             this.textBox_ArtViscShear.Name = "textBox_ArtViscShear";
             this.textBox_ArtViscShear.Size = new System.Drawing.Size(121, 20);
             this.textBox_ArtViscShear.TabIndex = 15;
-            this.textBox_ArtViscShear.Text = "0";
+            this.textBox_ArtViscShear.Text = "1";
             // 
             // label13
             // 
@@ -418,7 +439,7 @@
             this.textBox_ArtViscBulk.Name = "textBox_ArtViscBulk";
             this.textBox_ArtViscBulk.Size = new System.Drawing.Size(121, 20);
             this.textBox_ArtViscBulk.TabIndex = 14;
-            this.textBox_ArtViscBulk.Text = "1";
+            this.textBox_ArtViscBulk.Text = "0";
             // 
             // label11
             // 
@@ -511,6 +532,16 @@
             this.groupBox6.TabIndex = 11;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Boundaries";
+            // 
+            // checkBox_BoundaryUseChessOrder
+            // 
+            this.checkBox_BoundaryUseChessOrder.AutoSize = true;
+            this.checkBox_BoundaryUseChessOrder.Location = new System.Drawing.Point(4, 150);
+            this.checkBox_BoundaryUseChessOrder.Name = "checkBox_BoundaryUseChessOrder";
+            this.checkBox_BoundaryUseChessOrder.Size = new System.Drawing.Size(103, 17);
+            this.checkBox_BoundaryUseChessOrder.TabIndex = 24;
+            this.checkBox_BoundaryUseChessOrder.Text = "Use chess order";
+            this.checkBox_BoundaryUseChessOrder.UseVisualStyleBackColor = true;
             // 
             // textBox_BoundaryLayersNum
             // 
@@ -969,16 +1000,16 @@
             this.textBox_ExtraLocalThreads.Name = "textBox_ExtraLocalThreads";
             this.textBox_ExtraLocalThreads.Size = new System.Drawing.Size(117, 20);
             this.textBox_ExtraLocalThreads.TabIndex = 19;
-            this.textBox_ExtraLocalThreads.Text = "16";
+            this.textBox_ExtraLocalThreads.Text = "256";
             // 
             // label35
             // 
             this.label35.AutoSize = true;
             this.label35.Location = new System.Drawing.Point(3, 16);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(98, 13);
+            this.label35.Size = new System.Drawing.Size(71, 13);
             this.label35.TabIndex = 42;
-            this.label35.Text = "Local threads OMP";
+            this.label35.Text = "Local threads";
             // 
             // label34
             // 
@@ -1011,16 +1042,6 @@
             this.groupBox12.TabIndex = 42;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Experiment";
-            // 
-            // checkBox_BoundaryUseChessOrder
-            // 
-            this.checkBox_BoundaryUseChessOrder.AutoSize = true;
-            this.checkBox_BoundaryUseChessOrder.Location = new System.Drawing.Point(4, 150);
-            this.checkBox_BoundaryUseChessOrder.Name = "checkBox_BoundaryUseChessOrder";
-            this.checkBox_BoundaryUseChessOrder.Size = new System.Drawing.Size(103, 17);
-            this.checkBox_BoundaryUseChessOrder.TabIndex = 24;
-            this.checkBox_BoundaryUseChessOrder.Text = "Use chess order";
-            this.checkBox_BoundaryUseChessOrder.UseVisualStyleBackColor = true;
             // 
             // SPH2DParamsGeneratorForm
             // 
@@ -1099,7 +1120,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox comboBox_IntForceSKF;
         private System.Windows.Forms.ComboBox comboBox_IntForceTreat;
-        private System.Windows.Forms.TextBox textBox_IntForceSoundVelCoef;
+        private System.Windows.Forms.TextBox textBox_IntForceSoundVel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
@@ -1164,6 +1185,8 @@
         private System.Windows.Forms.CheckBox checkBox_ExtraCheckConsistency;
         private System.Windows.Forms.CheckBox checkBox_ExtraInconsistentStop;
         private System.Windows.Forms.CheckBox checkBox_BoundaryUseChessOrder;
+        private System.Windows.Forms.Label label_IntForceSoundVelCoef;
+        private System.Windows.Forms.ComboBox comboBox_IntForceSoundVelMethod;
     }
 }
 
