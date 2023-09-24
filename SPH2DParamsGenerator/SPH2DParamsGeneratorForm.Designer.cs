@@ -28,15 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_GeomOriginY = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox_GeomOriginX = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox_GeomSmoothLen = new System.Windows.Forms.TextBox();
+            this.textBox_IntForceHsml = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox_GeomDelta = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label_IntForceSoundVelCoef = new System.Windows.Forms.Label();
             this.comboBox_IntForceSoundVelMethod = new System.Windows.Forms.ComboBox();
@@ -50,8 +43,6 @@
             this.checkBox_DensityNorm = new System.Windows.Forms.CheckBox();
             this.comboBox_DensitySKF = new System.Windows.Forms.ComboBox();
             this.comboBox_DensityTreat = new System.Windows.Forms.ComboBox();
-            this.textBox_DensityValue = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -68,13 +59,7 @@
             this.textBox_AvVelCoef = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.checkBox_BoundaryUseChessOrder = new System.Windows.Forms.CheckBox();
-            this.textBox_BoundaryLayersNum = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.textBox_BoundaryDelta = new System.Windows.Forms.TextBox();
             this.comboBox_BoundaryTreat = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.textBox_WavesGenTimeWait = new System.Windows.Forms.TextBox();
@@ -83,7 +68,6 @@
             this.label21 = new System.Windows.Forms.Label();
             this.textBox_WavesGenLen = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.checkBox_EnableWavesGen = new System.Windows.Forms.CheckBox();
             this.comboBox_WavesGenTreat = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -100,132 +84,66 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.checkBox_StepEnableDump = new System.Windows.Forms.CheckBox();
+            this.checkBox_StepEnableEstimate = new System.Windows.Forms.CheckBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.comboBox_StepTreatment = new System.Windows.Forms.ComboBox();
             this.textBox_StepSave = new System.Windows.Forms.TextBox();
-            this.textBox_StepCheck = new System.Windows.Forms.TextBox();
-            this.label_StepCheck = new System.Windows.Forms.Label();
             this.textBox_StepEstimate = new System.Windows.Forms.TextBox();
             this.label_StepEstimate = new System.Windows.Forms.Label();
             this.textBox_StepDump = new System.Windows.Forms.TextBox();
             this.label_StepDump = new System.Windows.Forms.Label();
             this.label_StepSave = new System.Windows.Forms.Label();
+            this.textBox_ConsistencyStep = new System.Windows.Forms.TextBox();
+            this.label_StepCheck = new System.Windows.Forms.Label();
             this.button_GenerateProject = new System.Windows.Forms.Button();
-            this.label32 = new System.Windows.Forms.Label();
-            this.comboBox_ParticlesGenerator = new System.Windows.Forms.ComboBox();
-            this.button_OpenAsTemplate = new System.Windows.Forms.Button();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.checkBox_ExtraInconsistentStop = new System.Windows.Forms.CheckBox();
-            this.checkBox_ExtraCheckConsistency = new System.Windows.Forms.CheckBox();
             this.textBox_ExtraMaxNeighbours = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.textBox_ExtraLocalThreads = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
+            this.checkBox_ConsistencyCheck = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
             this.textBox_ExperimentName = new System.Windows.Forms.TextBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.comboBox_StepTreatment = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.button_OpenAsTemplate = new System.Windows.Forms.Button();
+            this.comboBox_ConsistencyTreat = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // textBox_IntForceHsml
             // 
-            this.groupBox1.Controls.Add(this.textBox_GeomOriginY);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox_GeomOriginX);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox_GeomSmoothLen);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox_GeomDelta);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(129, 190);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Geometry";
-            // 
-            // textBox_GeomOriginY
-            // 
-            this.textBox_GeomOriginY.Location = new System.Drawing.Point(4, 163);
-            this.textBox_GeomOriginY.Name = "textBox_GeomOriginY";
-            this.textBox_GeomOriginY.Size = new System.Drawing.Size(121, 20);
-            this.textBox_GeomOriginY.TabIndex = 4;
-            this.textBox_GeomOriginY.Text = "1";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 147);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Origin Y";
-            // 
-            // textBox_GeomOriginX
-            // 
-            this.textBox_GeomOriginX.Location = new System.Drawing.Point(4, 124);
-            this.textBox_GeomOriginX.Name = "textBox_GeomOriginX";
-            this.textBox_GeomOriginX.Size = new System.Drawing.Size(121, 20);
-            this.textBox_GeomOriginX.TabIndex = 3;
-            this.textBox_GeomOriginX.Text = "1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 108);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Origin X";
-            // 
-            // textBox_GeomSmoothLen
-            // 
-            this.textBox_GeomSmoothLen.Location = new System.Drawing.Point(4, 81);
-            this.textBox_GeomSmoothLen.Name = "textBox_GeomSmoothLen";
-            this.textBox_GeomSmoothLen.Size = new System.Drawing.Size(121, 20);
-            this.textBox_GeomSmoothLen.TabIndex = 2;
-            this.textBox_GeomSmoothLen.Text = "1";
+            this.textBox_IntForceHsml.Location = new System.Drawing.Point(4, 202);
+            this.textBox_IntForceHsml.Name = "textBox_IntForceHsml";
+            this.textBox_IntForceHsml.Size = new System.Drawing.Size(121, 20);
+            this.textBox_IntForceHsml.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1, 65);
+            this.label2.Location = new System.Drawing.Point(4, 186);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(116, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Smoothing length coef.";
             // 
-            // textBox_GeomDelta
-            // 
-            this.textBox_GeomDelta.Location = new System.Drawing.Point(4, 37);
-            this.textBox_GeomDelta.Name = "textBox_GeomDelta";
-            this.textBox_GeomDelta.Size = new System.Drawing.Size(121, 20);
-            this.textBox_GeomDelta.TabIndex = 1;
-            this.textBox_GeomDelta.Text = "1";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Particles delta";
-            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBox_IntForceHsml);
             this.groupBox2.Controls.Add(this.label_IntForceSoundVelCoef);
+            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.comboBox_IntForceSoundVelMethod);
             this.groupBox2.Controls.Add(this.comboBox_IntForceSKF);
             this.groupBox2.Controls.Add(this.comboBox_IntForceTreat);
@@ -233,9 +151,9 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Location = new System.Drawing.Point(147, 12);
+            this.groupBox2.Location = new System.Drawing.Point(11, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(129, 190);
+            this.groupBox2.Size = new System.Drawing.Size(129, 237);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Internal Force";
@@ -278,7 +196,6 @@
             this.textBox_IntForceSoundVel.Name = "textBox_IntForceSoundVel";
             this.textBox_IntForceSoundVel.Size = new System.Drawing.Size(121, 20);
             this.textBox_IntForceSoundVel.TabIndex = 7;
-            this.textBox_IntForceSoundVel.Text = "1";
             // 
             // label6
             // 
@@ -292,7 +209,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 65);
+            this.label7.Location = new System.Drawing.Point(6, 68);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(98, 13);
             this.label7.TabIndex = 2;
@@ -312,13 +229,11 @@
             this.groupBox3.Controls.Add(this.checkBox_DensityNorm);
             this.groupBox3.Controls.Add(this.comboBox_DensitySKF);
             this.groupBox3.Controls.Add(this.comboBox_DensityTreat);
-            this.groupBox3.Controls.Add(this.textBox_DensityValue);
-            this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Location = new System.Drawing.Point(282, 12);
+            this.groupBox3.Location = new System.Drawing.Point(149, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(129, 190);
+            this.groupBox3.Size = new System.Drawing.Size(129, 237);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Density";
@@ -326,7 +241,7 @@
             // checkBox_DensityNorm
             // 
             this.checkBox_DensityNorm.AutoSize = true;
-            this.checkBox_DensityNorm.Location = new System.Drawing.Point(4, 150);
+            this.checkBox_DensityNorm.Location = new System.Drawing.Point(4, 114);
             this.checkBox_DensityNorm.Name = "checkBox_DensityNorm";
             this.checkBox_DensityNorm.Size = new System.Drawing.Size(123, 17);
             this.checkBox_DensityNorm.TabIndex = 11;
@@ -349,27 +264,10 @@
             this.comboBox_DensityTreat.TabIndex = 8;
             this.comboBox_DensityTreat.SelectedIndexChanged += new System.EventHandler(this.comboBox_DensityTreat_SelectedIndexChanged);
             // 
-            // textBox_DensityValue
-            // 
-            this.textBox_DensityValue.Location = new System.Drawing.Point(4, 124);
-            this.textBox_DensityValue.Name = "textBox_DensityValue";
-            this.textBox_DensityValue.Size = new System.Drawing.Size(121, 20);
-            this.textBox_DensityValue.TabIndex = 10;
-            this.textBox_DensityValue.Text = "1";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 108);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Default value";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 65);
+            this.label9.Location = new System.Drawing.Point(6, 68);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(98, 13);
             this.label9.TabIndex = 2;
@@ -393,9 +291,9 @@
             this.groupBox4.Controls.Add(this.textBox_ArtViscBulk);
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(417, 12);
+            this.groupBox4.Location = new System.Drawing.Point(419, 12);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(129, 190);
+            this.groupBox4.Size = new System.Drawing.Size(129, 237);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Artificial Viscosity";
@@ -406,7 +304,6 @@
             this.textBox_ArtViscShear.Name = "textBox_ArtViscShear";
             this.textBox_ArtViscShear.Size = new System.Drawing.Size(121, 20);
             this.textBox_ArtViscShear.TabIndex = 15;
-            this.textBox_ArtViscShear.Text = "1";
             // 
             // label13
             // 
@@ -441,7 +338,6 @@
             this.textBox_ArtViscBulk.Name = "textBox_ArtViscBulk";
             this.textBox_ArtViscBulk.Size = new System.Drawing.Size(121, 20);
             this.textBox_ArtViscBulk.TabIndex = 14;
-            this.textBox_ArtViscBulk.Text = "0";
             // 
             // label11
             // 
@@ -468,9 +364,9 @@
             this.groupBox5.Controls.Add(this.textBox_AvVelCoef);
             this.groupBox5.Controls.Add(this.label15);
             this.groupBox5.Controls.Add(this.label16);
-            this.groupBox5.Location = new System.Drawing.Point(552, 12);
+            this.groupBox5.Location = new System.Drawing.Point(554, 12);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(129, 190);
+            this.groupBox5.Size = new System.Drawing.Size(129, 237);
             this.groupBox5.TabIndex = 13;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Average Velocity";
@@ -499,7 +395,6 @@
             this.textBox_AvVelCoef.Name = "textBox_AvVelCoef";
             this.textBox_AvVelCoef.Size = new System.Drawing.Size(121, 20);
             this.textBox_AvVelCoef.TabIndex = 18;
-            this.textBox_AvVelCoef.Text = "0";
             // 
             // label15
             // 
@@ -519,112 +414,52 @@
             this.label16.TabIndex = 2;
             this.label16.Text = "Smoothing function";
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.checkBox_BoundaryUseChessOrder);
-            this.groupBox6.Controls.Add(this.textBox_BoundaryLayersNum);
-            this.groupBox6.Controls.Add(this.label31);
-            this.groupBox6.Controls.Add(this.textBox_BoundaryDelta);
-            this.groupBox6.Controls.Add(this.comboBox_BoundaryTreat);
-            this.groupBox6.Controls.Add(this.label17);
-            this.groupBox6.Controls.Add(this.label18);
-            this.groupBox6.Location = new System.Drawing.Point(12, 208);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(129, 192);
-            this.groupBox6.TabIndex = 11;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Boundaries";
-            // 
-            // checkBox_BoundaryUseChessOrder
-            // 
-            this.checkBox_BoundaryUseChessOrder.AutoSize = true;
-            this.checkBox_BoundaryUseChessOrder.Location = new System.Drawing.Point(4, 150);
-            this.checkBox_BoundaryUseChessOrder.Name = "checkBox_BoundaryUseChessOrder";
-            this.checkBox_BoundaryUseChessOrder.Size = new System.Drawing.Size(103, 17);
-            this.checkBox_BoundaryUseChessOrder.TabIndex = 24;
-            this.checkBox_BoundaryUseChessOrder.Text = "Use chess order";
-            this.checkBox_BoundaryUseChessOrder.UseVisualStyleBackColor = true;
-            // 
-            // textBox_BoundaryLayersNum
-            // 
-            this.textBox_BoundaryLayersNum.Location = new System.Drawing.Point(4, 124);
-            this.textBox_BoundaryLayersNum.Name = "textBox_BoundaryLayersNum";
-            this.textBox_BoundaryLayersNum.Size = new System.Drawing.Size(121, 20);
-            this.textBox_BoundaryLayersNum.TabIndex = 22;
-            this.textBox_BoundaryLayersNum.Text = "0";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(6, 108);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(61, 13);
-            this.label31.TabIndex = 21;
-            this.label31.Text = "Layers num";
-            // 
-            // textBox_BoundaryDelta
-            // 
-            this.textBox_BoundaryDelta.Location = new System.Drawing.Point(4, 81);
-            this.textBox_BoundaryDelta.Name = "textBox_BoundaryDelta";
-            this.textBox_BoundaryDelta.Size = new System.Drawing.Size(121, 20);
-            this.textBox_BoundaryDelta.TabIndex = 20;
-            this.textBox_BoundaryDelta.Text = "1";
-            // 
             // comboBox_BoundaryTreat
             // 
-            this.comboBox_BoundaryTreat.Location = new System.Drawing.Point(4, 37);
+            this.comboBox_BoundaryTreat.Location = new System.Drawing.Point(4, 194);
             this.comboBox_BoundaryTreat.Name = "comboBox_BoundaryTreat";
             this.comboBox_BoundaryTreat.Size = new System.Drawing.Size(121, 21);
             this.comboBox_BoundaryTreat.TabIndex = 19;
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 65);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(105, 13);
-            this.label17.TabIndex = 2;
-            this.label17.Text = "Boundary delta coef.";
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 20);
+            this.label18.Location = new System.Drawing.Point(6, 178);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(55, 13);
+            this.label18.Size = new System.Drawing.Size(79, 13);
             this.label18.TabIndex = 0;
-            this.label18.Text = "Treatment";
+            this.label18.Text = "SBT Treatment";
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.comboBox_BoundaryTreat);
             this.groupBox7.Controls.Add(this.textBox_WavesGenTimeWait);
             this.groupBox7.Controls.Add(this.label33);
+            this.groupBox7.Controls.Add(this.label18);
             this.groupBox7.Controls.Add(this.textBox_WavesGenMagnitude);
             this.groupBox7.Controls.Add(this.label21);
             this.groupBox7.Controls.Add(this.textBox_WavesGenLen);
             this.groupBox7.Controls.Add(this.label14);
-            this.groupBox7.Controls.Add(this.checkBox_EnableWavesGen);
             this.groupBox7.Controls.Add(this.comboBox_WavesGenTreat);
             this.groupBox7.Controls.Add(this.label20);
-            this.groupBox7.Location = new System.Drawing.Point(147, 208);
+            this.groupBox7.Location = new System.Drawing.Point(284, 12);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(129, 192);
+            this.groupBox7.Size = new System.Drawing.Size(129, 237);
             this.groupBox7.TabIndex = 13;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Waves Generator";
+            this.groupBox7.Text = "External Force";
             // 
             // textBox_WavesGenTimeWait
             // 
-            this.textBox_WavesGenTimeWait.Location = new System.Drawing.Point(4, 170);
+            this.textBox_WavesGenTimeWait.Location = new System.Drawing.Point(4, 155);
             this.textBox_WavesGenTimeWait.Name = "textBox_WavesGenTimeWait";
             this.textBox_WavesGenTimeWait.Size = new System.Drawing.Size(121, 20);
             this.textBox_WavesGenTimeWait.TabIndex = 27;
-            this.textBox_WavesGenTimeWait.Text = "0";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(6, 154);
+            this.label33.Location = new System.Drawing.Point(6, 139);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(98, 13);
             this.label33.TabIndex = 26;
@@ -632,16 +467,15 @@
             // 
             // textBox_WavesGenMagnitude
             // 
-            this.textBox_WavesGenMagnitude.Location = new System.Drawing.Point(4, 131);
+            this.textBox_WavesGenMagnitude.Location = new System.Drawing.Point(4, 116);
             this.textBox_WavesGenMagnitude.Name = "textBox_WavesGenMagnitude";
             this.textBox_WavesGenMagnitude.Size = new System.Drawing.Size(121, 20);
             this.textBox_WavesGenMagnitude.TabIndex = 25;
-            this.textBox_WavesGenMagnitude.Text = "0";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 115);
+            this.label21.Location = new System.Drawing.Point(6, 100);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(88, 13);
             this.label21.TabIndex = 13;
@@ -649,35 +483,23 @@
             // 
             // textBox_WavesGenLen
             // 
-            this.textBox_WavesGenLen.Location = new System.Drawing.Point(4, 92);
+            this.textBox_WavesGenLen.Location = new System.Drawing.Point(4, 77);
             this.textBox_WavesGenLen.Name = "textBox_WavesGenLen";
             this.textBox_WavesGenLen.Size = new System.Drawing.Size(121, 20);
             this.textBox_WavesGenLen.TabIndex = 24;
-            this.textBox_WavesGenLen.Text = "0";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 76);
+            this.label14.Location = new System.Drawing.Point(6, 61);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(68, 13);
             this.label14.TabIndex = 11;
             this.label14.Text = "Wave length";
             // 
-            // checkBox_EnableWavesGen
-            // 
-            this.checkBox_EnableWavesGen.AutoSize = true;
-            this.checkBox_EnableWavesGen.Location = new System.Drawing.Point(6, 16);
-            this.checkBox_EnableWavesGen.Name = "checkBox_EnableWavesGen";
-            this.checkBox_EnableWavesGen.Size = new System.Drawing.Size(59, 17);
-            this.checkBox_EnableWavesGen.TabIndex = 21;
-            this.checkBox_EnableWavesGen.Text = "Enable";
-            this.checkBox_EnableWavesGen.UseVisualStyleBackColor = true;
-            this.checkBox_EnableWavesGen.CheckedChanged += new System.EventHandler(this.checkBox_EnableWavesGen_CheckedChanged);
-            // 
             // comboBox_WavesGenTreat
             // 
-            this.comboBox_WavesGenTreat.Location = new System.Drawing.Point(4, 52);
+            this.comboBox_WavesGenTreat.Location = new System.Drawing.Point(4, 37);
             this.comboBox_WavesGenTreat.Name = "comboBox_WavesGenTreat";
             this.comboBox_WavesGenTreat.Size = new System.Drawing.Size(121, 21);
             this.comboBox_WavesGenTreat.TabIndex = 22;
@@ -686,20 +508,20 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 36);
+            this.label20.Location = new System.Drawing.Point(6, 21);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(55, 13);
+            this.label20.Size = new System.Drawing.Size(86, 13);
             this.label20.TabIndex = 2;
-            this.label20.Text = "Treatment";
+            this.label20.Text = "NWM Treatment";
             // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.checkBox_EnableDynVisc);
             this.groupBox8.Controls.Add(this.textBox_DynViscValue);
             this.groupBox8.Controls.Add(this.label22);
-            this.groupBox8.Location = new System.Drawing.Point(282, 208);
+            this.groupBox8.Location = new System.Drawing.Point(284, 255);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(129, 89);
+            this.groupBox8.Size = new System.Drawing.Size(129, 85);
             this.groupBox8.TabIndex = 14;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Dynamic Viscosity";
@@ -721,7 +543,6 @@
             this.textBox_DynViscValue.Name = "textBox_DynViscValue";
             this.textBox_DynViscValue.Size = new System.Drawing.Size(121, 20);
             this.textBox_DynViscValue.TabIndex = 27;
-            this.textBox_DynViscValue.Text = "0";
             // 
             // label22
             // 
@@ -742,9 +563,9 @@
             this.groupBox9.Controls.Add(this.comboBox_TimeTreat);
             this.groupBox9.Controls.Add(this.label23);
             this.groupBox9.Controls.Add(this.label24);
-            this.groupBox9.Location = new System.Drawing.Point(417, 208);
+            this.groupBox9.Location = new System.Drawing.Point(11, 255);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(129, 192);
+            this.groupBox9.Size = new System.Drawing.Size(129, 203);
             this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Time integration";
@@ -755,7 +576,6 @@
             this.textBox_TimeSim.Name = "textBox_TimeSim";
             this.textBox_TimeSim.Size = new System.Drawing.Size(121, 20);
             this.textBox_TimeSim.TabIndex = 31;
-            this.textBox_TimeSim.Text = "1";
             // 
             // label26
             // 
@@ -772,7 +592,6 @@
             this.textBox_TimeDT.Name = "textBox_TimeDT";
             this.textBox_TimeDT.Size = new System.Drawing.Size(121, 20);
             this.textBox_TimeDT.TabIndex = 30;
-            this.textBox_TimeDT.Text = "1";
             // 
             // label25
             // 
@@ -789,7 +608,6 @@
             this.textBox_TimeCFL.Name = "textBox_TimeCFL";
             this.textBox_TimeCFL.Size = new System.Drawing.Size(121, 20);
             this.textBox_TimeCFL.TabIndex = 29;
-            this.textBox_TimeCFL.Text = "1";
             // 
             // comboBox_TimeTreat
             // 
@@ -819,6 +637,8 @@
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.checkBox_StepEnableDump);
+            this.groupBox10.Controls.Add(this.checkBox_StepEnableEstimate);
             this.groupBox10.Controls.Add(this.label19);
             this.groupBox10.Controls.Add(this.comboBox_StepTreatment);
             this.groupBox10.Controls.Add(this.textBox_StepSave);
@@ -827,12 +647,50 @@
             this.groupBox10.Controls.Add(this.textBox_StepDump);
             this.groupBox10.Controls.Add(this.label_StepDump);
             this.groupBox10.Controls.Add(this.label_StepSave);
-            this.groupBox10.Location = new System.Drawing.Point(552, 208);
+            this.groupBox10.Location = new System.Drawing.Point(149, 255);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(129, 192);
+            this.groupBox10.Size = new System.Drawing.Size(129, 203);
             this.groupBox10.TabIndex = 15;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Time step";
+            // 
+            // checkBox_StepEnableDump
+            // 
+            this.checkBox_StepEnableDump.AutoSize = true;
+            this.checkBox_StepEnableDump.Location = new System.Drawing.Point(114, 121);
+            this.checkBox_StepEnableDump.Name = "checkBox_StepEnableDump";
+            this.checkBox_StepEnableDump.Size = new System.Drawing.Size(15, 14);
+            this.checkBox_StepEnableDump.TabIndex = 39;
+            this.checkBox_StepEnableDump.UseVisualStyleBackColor = true;
+            this.checkBox_StepEnableDump.CheckedChanged += new System.EventHandler(this.checkBox_StepEnableDump_CheckedChanged);
+            // 
+            // checkBox_StepEnableEstimate
+            // 
+            this.checkBox_StepEnableEstimate.AutoSize = true;
+            this.checkBox_StepEnableEstimate.Location = new System.Drawing.Point(114, 162);
+            this.checkBox_StepEnableEstimate.Name = "checkBox_StepEnableEstimate";
+            this.checkBox_StepEnableEstimate.Size = new System.Drawing.Size(15, 14);
+            this.checkBox_StepEnableEstimate.TabIndex = 38;
+            this.checkBox_StepEnableEstimate.UseVisualStyleBackColor = true;
+            this.checkBox_StepEnableEstimate.CheckedChanged += new System.EventHandler(this.checkBox_StepEnableEstimate_CheckedChanged);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 17);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(55, 13);
+            this.label19.TabIndex = 37;
+            this.label19.Text = "Treatment";
+            // 
+            // comboBox_StepTreatment
+            // 
+            this.comboBox_StepTreatment.FormattingEnabled = true;
+            this.comboBox_StepTreatment.Location = new System.Drawing.Point(4, 36);
+            this.comboBox_StepTreatment.Name = "comboBox_StepTreatment";
+            this.comboBox_StepTreatment.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_StepTreatment.TabIndex = 36;
+            this.comboBox_StepTreatment.SelectedIndexChanged += new System.EventHandler(this.comboBox_StepTreatment_SelectedIndexChanged);
             // 
             // textBox_StepSave
             // 
@@ -840,32 +698,13 @@
             this.textBox_StepSave.Name = "textBox_StepSave";
             this.textBox_StepSave.Size = new System.Drawing.Size(121, 20);
             this.textBox_StepSave.TabIndex = 32;
-            this.textBox_StepSave.Text = "1";
-            // 
-            // textBox_StepCheck
-            // 
-            this.textBox_StepCheck.Location = new System.Drawing.Point(6, 156);
-            this.textBox_StepCheck.Name = "textBox_StepCheck";
-            this.textBox_StepCheck.Size = new System.Drawing.Size(117, 20);
-            this.textBox_StepCheck.TabIndex = 35;
-            this.textBox_StepCheck.Text = "1";
-            // 
-            // label_StepCheck
-            // 
-            this.label_StepCheck.AutoSize = true;
-            this.label_StepCheck.Location = new System.Drawing.Point(6, 140);
-            this.label_StepCheck.Name = "label_StepCheck";
-            this.label_StepCheck.Size = new System.Drawing.Size(61, 13);
-            this.label_StepCheck.TabIndex = 14;
-            this.label_StepCheck.Text = "Check step";
             // 
             // textBox_StepEstimate
             // 
             this.textBox_StepEstimate.Location = new System.Drawing.Point(4, 159);
             this.textBox_StepEstimate.Name = "textBox_StepEstimate";
-            this.textBox_StepEstimate.Size = new System.Drawing.Size(121, 20);
+            this.textBox_StepEstimate.Size = new System.Drawing.Size(104, 20);
             this.textBox_StepEstimate.TabIndex = 34;
-            this.textBox_StepEstimate.Text = "1";
             // 
             // label_StepEstimate
             // 
@@ -880,9 +719,8 @@
             // 
             this.textBox_StepDump.Location = new System.Drawing.Point(4, 118);
             this.textBox_StepDump.Name = "textBox_StepDump";
-            this.textBox_StepDump.Size = new System.Drawing.Size(121, 20);
+            this.textBox_StepDump.Size = new System.Drawing.Size(104, 20);
             this.textBox_StepDump.TabIndex = 33;
-            this.textBox_StepDump.Text = "1";
             // 
             // label_StepDump
             // 
@@ -902,85 +740,44 @@
             this.label_StepSave.TabIndex = 0;
             this.label_StepSave.Text = "Save step";
             // 
+            // textBox_ConsistencyStep
+            // 
+            this.textBox_ConsistencyStep.Location = new System.Drawing.Point(6, 101);
+            this.textBox_ConsistencyStep.Name = "textBox_ConsistencyStep";
+            this.textBox_ConsistencyStep.Size = new System.Drawing.Size(117, 20);
+            this.textBox_ConsistencyStep.TabIndex = 35;
+            // 
+            // label_StepCheck
+            // 
+            this.label_StepCheck.AutoSize = true;
+            this.label_StepCheck.Location = new System.Drawing.Point(6, 85);
+            this.label_StepCheck.Name = "label_StepCheck";
+            this.label_StepCheck.Size = new System.Drawing.Size(61, 13);
+            this.label_StepCheck.TabIndex = 14;
+            this.label_StepCheck.Text = "Check step";
+            // 
             // button_GenerateProject
             // 
-            this.button_GenerateProject.Location = new System.Drawing.Point(0, 150);
+            this.button_GenerateProject.Location = new System.Drawing.Point(0, 141);
             this.button_GenerateProject.Name = "button_GenerateProject";
-            this.button_GenerateProject.Size = new System.Drawing.Size(129, 42);
+            this.button_GenerateProject.Size = new System.Drawing.Size(129, 62);
             this.button_GenerateProject.TabIndex = 36;
             this.button_GenerateProject.Text = "Generate project";
             this.button_GenerateProject.UseVisualStyleBackColor = true;
             this.button_GenerateProject.Click += new System.EventHandler(this.button_GenerateProject_Click);
             // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(6, 17);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(95, 13);
-            this.label32.TabIndex = 37;
-            this.label32.Text = "Particles generator";
-            // 
-            // comboBox_ParticlesGenerator
-            // 
-            this.comboBox_ParticlesGenerator.FormattingEnabled = true;
-            this.comboBox_ParticlesGenerator.Location = new System.Drawing.Point(6, 35);
-            this.comboBox_ParticlesGenerator.Name = "comboBox_ParticlesGenerator";
-            this.comboBox_ParticlesGenerator.Size = new System.Drawing.Size(117, 21);
-            this.comboBox_ParticlesGenerator.TabIndex = 38;
-            this.comboBox_ParticlesGenerator.SelectedIndexChanged += new System.EventHandler(this.comboBox_ParticlesGenerator_SelectedIndexChanged);
-            // 
-            // button_OpenAsTemplate
-            // 
-            this.button_OpenAsTemplate.Location = new System.Drawing.Point(0, 102);
-            this.button_OpenAsTemplate.Name = "button_OpenAsTemplate";
-            this.button_OpenAsTemplate.Size = new System.Drawing.Size(129, 42);
-            this.button_OpenAsTemplate.TabIndex = 39;
-            this.button_OpenAsTemplate.Text = "Open as template";
-            this.button_OpenAsTemplate.UseVisualStyleBackColor = true;
-            this.button_OpenAsTemplate.Click += new System.EventHandler(this.button_OpenAsTemplate_Click);
-            // 
             // groupBox11
             // 
-            this.groupBox11.Controls.Add(this.checkBox_ExtraInconsistentStop);
-            this.groupBox11.Controls.Add(this.checkBox_ExtraCheckConsistency);
             this.groupBox11.Controls.Add(this.textBox_ExtraMaxNeighbours);
-            this.groupBox11.Controls.Add(this.textBox_StepCheck);
             this.groupBox11.Controls.Add(this.label36);
-            this.groupBox11.Controls.Add(this.label_StepCheck);
             this.groupBox11.Controls.Add(this.textBox_ExtraLocalThreads);
             this.groupBox11.Controls.Add(this.label35);
-            this.groupBox11.Location = new System.Drawing.Point(687, 12);
+            this.groupBox11.Location = new System.Drawing.Point(284, 347);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(129, 190);
+            this.groupBox11.Size = new System.Drawing.Size(129, 111);
             this.groupBox11.TabIndex = 40;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Extra";
-            // 
-            // checkBox_ExtraInconsistentStop
-            // 
-            this.checkBox_ExtraInconsistentStop.AutoSize = true;
-            this.checkBox_ExtraInconsistentStop.Checked = true;
-            this.checkBox_ExtraInconsistentStop.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_ExtraInconsistentStop.Location = new System.Drawing.Point(6, 120);
-            this.checkBox_ExtraInconsistentStop.Name = "checkBox_ExtraInconsistentStop";
-            this.checkBox_ExtraInconsistentStop.Size = new System.Drawing.Size(106, 17);
-            this.checkBox_ExtraInconsistentStop.TabIndex = 46;
-            this.checkBox_ExtraInconsistentStop.Text = "Inconsistent stop";
-            this.checkBox_ExtraInconsistentStop.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_ExtraCheckConsistency
-            // 
-            this.checkBox_ExtraCheckConsistency.AutoSize = true;
-            this.checkBox_ExtraCheckConsistency.Checked = true;
-            this.checkBox_ExtraCheckConsistency.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_ExtraCheckConsistency.Location = new System.Drawing.Point(6, 97);
-            this.checkBox_ExtraCheckConsistency.Name = "checkBox_ExtraCheckConsistency";
-            this.checkBox_ExtraCheckConsistency.Size = new System.Drawing.Size(116, 17);
-            this.checkBox_ExtraCheckConsistency.TabIndex = 45;
-            this.checkBox_ExtraCheckConsistency.Text = "Check consistency";
-            this.checkBox_ExtraCheckConsistency.UseVisualStyleBackColor = true;
-            this.checkBox_ExtraCheckConsistency.CheckedChanged += new System.EventHandler(this.checkBox_ExtraCheckConsistency_CheckedChanged);
             // 
             // textBox_ExtraMaxNeighbours
             // 
@@ -988,7 +785,6 @@
             this.textBox_ExtraMaxNeighbours.Name = "textBox_ExtraMaxNeighbours";
             this.textBox_ExtraMaxNeighbours.Size = new System.Drawing.Size(117, 20);
             this.textBox_ExtraMaxNeighbours.TabIndex = 44;
-            this.textBox_ExtraMaxNeighbours.Text = "64";
             // 
             // label36
             // 
@@ -1005,7 +801,6 @@
             this.textBox_ExtraLocalThreads.Name = "textBox_ExtraLocalThreads";
             this.textBox_ExtraLocalThreads.Size = new System.Drawing.Size(117, 20);
             this.textBox_ExtraLocalThreads.TabIndex = 19;
-            this.textBox_ExtraLocalThreads.Text = "256";
             // 
             // label35
             // 
@@ -1016,10 +811,23 @@
             this.label35.TabIndex = 42;
             this.label35.Text = "Local threads";
             // 
+            // checkBox_ConsistencyCheck
+            // 
+            this.checkBox_ConsistencyCheck.AutoSize = true;
+            this.checkBox_ConsistencyCheck.Checked = true;
+            this.checkBox_ConsistencyCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_ConsistencyCheck.Location = new System.Drawing.Point(6, 20);
+            this.checkBox_ConsistencyCheck.Name = "checkBox_ConsistencyCheck";
+            this.checkBox_ConsistencyCheck.Size = new System.Drawing.Size(92, 17);
+            this.checkBox_ConsistencyCheck.TabIndex = 45;
+            this.checkBox_ConsistencyCheck.Text = "Enable check";
+            this.checkBox_ConsistencyCheck.UseVisualStyleBackColor = true;
+            this.checkBox_ConsistencyCheck.CheckedChanged += new System.EventHandler(this.checkBox_ConsistencyCheck_CheckedChanged);
+            // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(6, 60);
+            this.label34.Location = new System.Drawing.Point(6, 24);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(88, 13);
             this.label34.TabIndex = 41;
@@ -1027,7 +835,7 @@
             // 
             // textBox_ExperimentName
             // 
-            this.textBox_ExperimentName.Location = new System.Drawing.Point(6, 76);
+            this.textBox_ExperimentName.Location = new System.Drawing.Point(4, 40);
             this.textBox_ExperimentName.Name = "textBox_ExperimentName";
             this.textBox_ExperimentName.Size = new System.Drawing.Size(117, 20);
             this.textBox_ExperimentName.TabIndex = 36;
@@ -1037,58 +845,76 @@
             // 
             this.groupBox12.Controls.Add(this.button_GenerateProject);
             this.groupBox12.Controls.Add(this.button_OpenAsTemplate);
-            this.groupBox12.Controls.Add(this.label32);
             this.groupBox12.Controls.Add(this.textBox_ExperimentName);
             this.groupBox12.Controls.Add(this.label34);
-            this.groupBox12.Controls.Add(this.comboBox_ParticlesGenerator);
-            this.groupBox12.Location = new System.Drawing.Point(687, 208);
+            this.groupBox12.Location = new System.Drawing.Point(554, 255);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(129, 192);
+            this.groupBox12.Size = new System.Drawing.Size(129, 203);
             this.groupBox12.TabIndex = 42;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Experiment";
             // 
-            // comboBox_StepTreatment
+            // groupBox13
             // 
-            this.comboBox_StepTreatment.FormattingEnabled = true;
-            this.comboBox_StepTreatment.Location = new System.Drawing.Point(4, 36);
-            this.comboBox_StepTreatment.Name = "comboBox_StepTreatment";
-            this.comboBox_StepTreatment.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_StepTreatment.TabIndex = 36;
-            this.comboBox_StepTreatment.SelectedIndexChanged += new System.EventHandler(this.comboBox_StepTreatment_SelectedIndexChanged);
+            this.groupBox13.Controls.Add(this.label1);
+            this.groupBox13.Controls.Add(this.comboBox_ConsistencyTreat);
+            this.groupBox13.Controls.Add(this.textBox_ConsistencyStep);
+            this.groupBox13.Controls.Add(this.checkBox_ConsistencyCheck);
+            this.groupBox13.Controls.Add(this.label_StepCheck);
+            this.groupBox13.Location = new System.Drawing.Point(419, 255);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(129, 203);
+            this.groupBox13.TabIndex = 43;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Consistency";
             // 
-            // label19
+            // button_OpenAsTemplate
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 17);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(55, 13);
-            this.label19.TabIndex = 37;
-            this.label19.Text = "Treatment";
+            this.button_OpenAsTemplate.Location = new System.Drawing.Point(0, 73);
+            this.button_OpenAsTemplate.Name = "button_OpenAsTemplate";
+            this.button_OpenAsTemplate.Size = new System.Drawing.Size(129, 62);
+            this.button_OpenAsTemplate.TabIndex = 39;
+            this.button_OpenAsTemplate.Text = "Open project";
+            this.button_OpenAsTemplate.UseVisualStyleBackColor = true;
+            this.button_OpenAsTemplate.Click += new System.EventHandler(this.button_OpenAsTemplate_Click);
+            // 
+            // comboBox_ConsistencyTreat
+            // 
+            this.comboBox_ConsistencyTreat.FormattingEnabled = true;
+            this.comboBox_ConsistencyTreat.Location = new System.Drawing.Point(4, 62);
+            this.comboBox_ConsistencyTreat.Name = "comboBox_ConsistencyTreat";
+            this.comboBox_ConsistencyTreat.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_ConsistencyTreat.TabIndex = 40;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Treatment";
             // 
             // SPH2DParamsGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 404);
+            this.ClientSize = new System.Drawing.Size(689, 465);
+            this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox12);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox8);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SPH2DParamsGeneratorForm";
             this.Text = "Simulation properties generator";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1097,8 +923,6 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
@@ -1111,6 +935,8 @@
             this.groupBox11.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1121,15 +947,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox_GeomOriginY;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox_GeomOriginX;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox_GeomSmoothLen;
+        private System.Windows.Forms.TextBox textBox_IntForceHsml;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_GeomDelta;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox checkBox_EnableArtVisc;
@@ -1141,8 +960,6 @@
         private System.Windows.Forms.CheckBox checkBox_DensityNorm;
         private System.Windows.Forms.ComboBox comboBox_DensitySKF;
         private System.Windows.Forms.ComboBox comboBox_DensityTreat;
-        private System.Windows.Forms.TextBox textBox_DensityValue;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -1155,13 +972,9 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.TextBox textBox_WavesGenLen;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.CheckBox checkBox_EnableWavesGen;
         private System.Windows.Forms.ComboBox comboBox_WavesGenTreat;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TextBox textBox_BoundaryDelta;
         private System.Windows.Forms.ComboBox comboBox_BoundaryTreat;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox checkBox_EnableAvVel;
@@ -1186,7 +999,7 @@
         private System.Windows.Forms.TextBox textBox_TimeDT;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.TextBox textBox_StepCheck;
+        private System.Windows.Forms.TextBox textBox_ConsistencyStep;
         private System.Windows.Forms.Label label_StepCheck;
         private System.Windows.Forms.TextBox textBox_StepEstimate;
         private System.Windows.Forms.Label label_StepEstimate;
@@ -1195,13 +1008,8 @@
         private System.Windows.Forms.Label label_StepSave;
         private System.Windows.Forms.TextBox textBox_StepSave;
         private System.Windows.Forms.Button button_GenerateProject;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox textBox_BoundaryLayersNum;
         private System.Windows.Forms.TextBox textBox_WavesGenTimeWait;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.ComboBox comboBox_ParticlesGenerator;
-        private System.Windows.Forms.Button button_OpenAsTemplate;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.TextBox textBox_ExtraMaxNeighbours;
         private System.Windows.Forms.Label label36;
@@ -1210,13 +1018,17 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.TextBox textBox_ExperimentName;
         private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.CheckBox checkBox_ExtraCheckConsistency;
-        private System.Windows.Forms.CheckBox checkBox_ExtraInconsistentStop;
-        private System.Windows.Forms.CheckBox checkBox_BoundaryUseChessOrder;
+        private System.Windows.Forms.CheckBox checkBox_ConsistencyCheck;
         private System.Windows.Forms.Label label_IntForceSoundVelCoef;
         private System.Windows.Forms.ComboBox comboBox_IntForceSoundVelMethod;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox comboBox_StepTreatment;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.CheckBox checkBox_StepEnableDump;
+        private System.Windows.Forms.CheckBox checkBox_StepEnableEstimate;
+        private System.Windows.Forms.Button button_OpenAsTemplate;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox_ConsistencyTreat;
     }
 }
 

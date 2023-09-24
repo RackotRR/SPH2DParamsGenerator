@@ -9,19 +9,19 @@ namespace SPH2DParamsGenerator
 {
     class pa_sph
     {
-        public static int toIndex(uint pa_sph) => (int)pa_sph - 1;
-        public static uint fromIndex(int index) => (uint)(index + 1);
+        public static int toIndex(int pa_sph) => pa_sph - 1;
+        public static int fromIndex(int index) => index + 1;
     }
 
     class skf // smoothing kernel function
     {
-        public static uint cubic => 1;
-        public static uint gauss => 2;
-        public static uint quintic => 3;
-        public static uint desbrun => 4;
+        public static int cubic => 1;
+        public static int gauss => 2;
+        public static int qintic => 3;
+        public static int desbrun => 4;
 
-        public static int toIndex(uint skf) => (int)skf - 1;
-        public static uint fromIndex(int index) => (uint)(index + 1);
+        public static int toIndex(int skf) => skf - 1;
+        public static int fromIndex(int index) => index + 1;
     }
 
     class sbt // solid boundary treatment
@@ -32,14 +32,11 @@ namespace SPH2DParamsGenerator
 
     class nwm // numerical waves maker
     {
-        public static uint no_waves => 0;
-        public static uint relaxation_zone => 1;
-        public static uint dynamic => 2;
-        public static uint impulse => 3;
-        public static uint wall_disappear => 4;
-
-        public static int toIndex(uint nwm) => (int)nwm - 1;
-        public static uint fromIndex(int index) => (uint)(index + 1);
+        public static int no_waves => 0;
+        public static int relaxation_zone => 1;
+        public static int dynamic => 2;
+        public static int impulse => 3;
+        public static int wall_disappear => 4;
     }
 
     class dt_method
@@ -71,5 +68,18 @@ namespace SPH2DParamsGenerator
     {
         public static int summation => 0;
         public static int continuity => 1;
+    }
+
+    class consistency_treatment
+    {
+        public static int print => 0;
+        public static int stop => 1;
+        public static int fix => 2;
+    }
+    
+    class density_normalization
+    {
+        public static int none => 0;
+        public static int basic => 1;
     }
 }

@@ -10,9 +10,6 @@ namespace SPH2DParamsGenerator
     public partial class SPH2DParamsGeneratorForm : Form
     {
         string LastFolderOpened = null;
-        const uint TargetParamsVersionMajor = 2;
-        const uint TargetParamsVersionMinor = 13;
-
 
         public SPH2DParamsGeneratorForm()
         {
@@ -20,8 +17,7 @@ namespace SPH2DParamsGenerator
 
             Setup();
             UpdateElements();
-            Text = string.Format("Simulation properties generator v{0}.{1}", 
-                TargetParamsVersionMajor, TargetParamsVersionMinor);
+            Text = string.Format("Simulation properties generator v{0}.{1}", Version.Major, Version.Minor);
         }
 
         void Setup()
@@ -34,7 +30,7 @@ namespace SPH2DParamsGenerator
             SetupTimeStep();
             SetupDensity();
             SetupInternalForce();
-            SetupExperiment();
+            SetupConsistency();
         }
         void UpdateElements()
         {
@@ -42,11 +38,9 @@ namespace SPH2DParamsGenerator
             UpdateAverageVelocity();
             UpdateDynamicViscosity();
             UpdateWavesGenerator();
-            UpdateBoundaries();
             UpdateTimeIntegration();
             UpdateDensity();
-            UpdateGeometry();
-            UpdateExtra();
+            UpdateConsistency();
             UpdateTimeStep();
         }
 
@@ -55,7 +49,7 @@ namespace SPH2DParamsGenerator
             comboBoxItems.Clear();
             comboBoxItems.Add("Cubic");
             comboBoxItems.Add("Gauss");
-            comboBoxItems.Add("Quintic");
+            comboBoxItems.Add("Qintic");
             comboBoxItems.Add("Desbrun");
         }
 
@@ -94,17 +88,18 @@ namespace SPH2DParamsGenerator
         void SetupWavesGenerator()
         {
             comboBox_WavesGenTreat.Items.Clear();
+            comboBox_WavesGenTreat.Items.Add("No waves");
             comboBox_WavesGenTreat.Items.Add("RZM");
             comboBox_WavesGenTreat.Items.Add("Dynamic");
             comboBox_WavesGenTreat.Items.Add("Impulse");
             comboBox_WavesGenTreat.Items.Add("Disappear wall");
-            comboBox_WavesGenTreat.SelectedIndex = nwm.toIndex(nwm.dynamic);
+            comboBox_WavesGenTreat.SelectedIndex = nwm.no_waves;
             comboBox_WavesGenTreat.DropDownStyle = ComboBoxStyle.DropDownList;
         }
         void UpdateWavesGenerator()
         {
-            bool enabled = checkBox_EnableWavesGen.Checked;
-            bool disappear_wall_treatment = comboBox_WavesGenTreat.SelectedIndex == nwm.toIndex(nwm.wall_disappear);
+            bool enabled = comboBox_WavesGenTreat.SelectedIndex != nwm.no_waves;
+            bool disappear_wall_treatment = comboBox_WavesGenTreat.SelectedIndex == nwm.wall_disappear;
             comboBox_WavesGenTreat.Enabled = enabled;
             textBox_WavesGenLen.Enabled = enabled && !disappear_wall_treatment;
             textBox_WavesGenMagnitude.Enabled = enabled && !disappear_wall_treatment;
@@ -118,12 +113,6 @@ namespace SPH2DParamsGenerator
             comboBox_BoundaryTreat.Items.Add("Repulsive");
             comboBox_BoundaryTreat.SelectedIndex = sbt.repulsive;
             comboBox_BoundaryTreat.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-        void UpdateBoundaries()
-        {
-            bool usePicGen = comboBox_ParticlesGenerator.SelectedIndex == particle_generator.pic_gec;
-            textBox_BoundaryLayersNum.Enabled = !usePicGen;
-            textBox_BoundaryDelta.Enabled = usePicGen;
         }
 
         void SetupTimeIntegration()
@@ -211,262 +200,195 @@ namespace SPH2DParamsGenerator
                 label_StepSave.Text = "Save time";
                 label_StepDump.Text = "Dump time";
             }
+
+            textBox_StepDump.Enabled = checkBox_StepEnableDump.Checked;
+            textBox_StepEstimate.Enabled = checkBox_StepEnableEstimate.Checked;
         }
 
-        void UpdateGeometry()
+        void SetupConsistency()
         {
-            bool enable = comboBox_ParticlesGenerator.SelectedIndex == particle_generator.pic_gec;
-            textBox_GeomDelta.Enabled = enable;
-            textBox_GeomSmoothLen.Enabled = enable;
-            textBox_GeomOriginX.Enabled = enable;
-            textBox_GeomOriginY.Enabled = enable;
+            comboBox_ConsistencyTreat.Items.Clear();
+            comboBox_ConsistencyTreat.Items.Add("Print");
+            comboBox_ConsistencyTreat.Items.Add("Stop");
+            comboBox_ConsistencyTreat.Items.Add("Fix");
+            comboBox_ConsistencyTreat.SelectedIndex = 1;
+            comboBox_ConsistencyTreat.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        void UpdateExtra()
+        void UpdateConsistency()
         {
-            checkBox_ExtraInconsistentStop.Enabled = checkBox_ExtraCheckConsistency.Checked;
-            textBox_StepCheck.Enabled = checkBox_ExtraCheckConsistency.Checked;
+            bool enabled = checkBox_ConsistencyCheck.Checked;
+            comboBox_ConsistencyTreat.Enabled = enabled;
+            textBox_ConsistencyStep.Enabled = enabled;
         }
-        
-        void SetupExperiment()
+
+        int? NullParseInt(string str)
         {
-            comboBox_ParticlesGenerator.Items.Clear();
-            comboBox_ParticlesGenerator.Items.Add("Script");
-            comboBox_ParticlesGenerator.Items.Add("SPH2DPicGen");
-            comboBox_ParticlesGenerator.SelectedIndex = particle_generator.script;
-            comboBox_ParticlesGenerator.DropDownStyle = ComboBoxStyle.DropDownList;
+            int val;
+            if (int.TryParse(str, out val))
+            {
+                return val;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        float? NullParseFloat(string str)
+        {
+            float val;
+            if (float.TryParse(str, out val))
+            {
+                return val;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        int ParseInt(string str, string field)
+        {
+            int val;
+            if (int.TryParse(str, out val))
+            {
+                return val;
+            }
+            else
+            {
+                throw new Exception("Can't parse mandatory field '" + field + "'.");
+            }
+        }
+        float ParseFloat(string str, string field)
+        {
+            float val;
+            if (float.TryParse(str, out val))
+            {
+                return val;
+            }
+            else
+            {
+                throw new Exception("Can't parse mandatory field '" + field + "'.");
+            }
         }
 
         void FillInArtificialViscosity(ExperimentParams experimentParams)
         {
             experimentParams.artificial_viscosity = checkBox_EnableArtVisc.Checked;
-            if (experimentParams.artificial_viscosity)
+            if (experimentParams.artificial_viscosity.Value)
             {
-                experimentParams.artificial_bulk_visc = float.Parse(textBox_ArtViscBulk.Text);
-                experimentParams.artificial_shear_visc = float.Parse(textBox_ArtViscShear.Text);
+                experimentParams.artificial_bulk_visc = ParseFloat(textBox_ArtViscBulk.Text, "artifical_bulk_visc");
+                experimentParams.artificial_shear_visc = ParseFloat(textBox_ArtViscShear.Text, "artificial_shear_visc");
                 experimentParams.artificial_viscosity_skf = skf.fromIndex(comboBox_ArtViscSKF.SelectedIndex);
-            }
-            else
-            {
-                experimentParams.artificial_bulk_visc = 0;
-                experimentParams.artificial_shear_visc = 0;
-                experimentParams.artificial_viscosity_skf = 0;
             }
         }
         void FillInAverageVelocity(ExperimentParams experimentParams)
         {
             experimentParams.average_velocity = checkBox_EnableAvVel.Checked;
-            if (experimentParams.average_velocity)
+            if (experimentParams.average_velocity.Value)
             {
-                experimentParams.average_velocity_epsilon = float.Parse(textBox_AvVelCoef.Text);
+                experimentParams.average_velocity_coef = ParseFloat(textBox_AvVelCoef.Text, "average_velocity_coef");
                 experimentParams.average_velocity_skf = skf.fromIndex(comboBox_AvVelSKF.SelectedIndex);
-            }
-            else
-            {
-                experimentParams.average_velocity_epsilon = 0;
-                experimentParams.average_velocity_skf = 0;
             }
         }
         void FillInDensity(ExperimentParams experimentParams)
         {
-            experimentParams.summation_density = comboBox_DensityTreat.SelectedIndex == density_method.summation;
+            experimentParams.density_treatment = comboBox_DensityTreat.SelectedIndex;
             experimentParams.density_skf = skf.fromIndex(comboBox_DensitySKF.SelectedIndex);
-            const int dim = 2;
-            float delta = float.Parse(textBox_GeomDelta.Text);
-            experimentParams.rho0 = float.Parse(textBox_DensityValue.Text);
-            experimentParams.mass = (float)Math.Pow(delta, dim) * experimentParams.rho0;
-            experimentParams.nor_density = checkBox_DensityNorm.Checked;
+            if (checkBox_DensityNorm.Checked)
+            {
+                experimentParams.density_normalization = density_normalization.basic;
+            }
         }
         void FillInInternalForce(ExperimentParams experimentParams)
         {
-            experimentParams.int_force_skf = skf.fromIndex(comboBox_IntForceSKF.SelectedIndex);
-            experimentParams.pa_sph = pa_sph.fromIndex(comboBox_IntForceTreat.SelectedIndex);
-            experimentParams.eos_sound_vel_method = (uint)(comboBox_IntForceSoundVelMethod.SelectedIndex);
+            experimentParams.intf_hsml_coef = NullParseFloat(textBox_IntForceHsml.Text);
+            experimentParams.intf_skf = skf.fromIndex(comboBox_IntForceSKF.SelectedIndex);
+            experimentParams.intf_sph_approximation = pa_sph.fromIndex(comboBox_IntForceTreat.SelectedIndex);
+            experimentParams.eos_sound_vel_method = comboBox_IntForceSoundVelMethod.SelectedIndex;
             if (experimentParams.eos_sound_vel_method == eos_sound_vel_method.dam_break)
             {
-                experimentParams.eos_csqr_k = float.Parse(textBox_IntForceSoundVel.Text);
-                experimentParams.eos_sound_vel = 0;
+                experimentParams.eos_sound_vel_coef = ParseFloat(textBox_IntForceSoundVel.Text, "eos_sound_vel_coef");
             }
             else
             {
-                experimentParams.eos_csqr_k = 0;
-                experimentParams.eos_sound_vel = float.Parse(textBox_IntForceSoundVel.Text);
-            }
-        }
-        void FillInGeometry(ExperimentParams experimentParams)
-        {
-            if (comboBox_ParticlesGenerator.SelectedIndex == particle_generator.script)
-            {
-                experimentParams.delta = 0;
-                experimentParams.hsml = 0;
-                experimentParams.x_mingeom = 0;
-                experimentParams.y_mingeom = 0;
-            }   
-            else
-            {
-                experimentParams.delta = float.Parse(textBox_GeomDelta.Text);
-                experimentParams.hsml = experimentParams.delta * float.Parse(textBox_GeomSmoothLen.Text);
-                experimentParams.x_mingeom = float.Parse(textBox_GeomOriginX.Text);
-                experimentParams.y_mingeom = float.Parse(textBox_GeomOriginY.Text);
+                experimentParams.eos_sound_vel = ParseFloat(textBox_IntForceSoundVel.Text, "eos_sound_vel");
             }
         }
         void FillInWavesGenerator(ExperimentParams experimentParams)
         {
-            experimentParams.waves_generator = checkBox_EnableWavesGen.Checked;
-            if (experimentParams.waves_generator)
+            experimentParams.boundary_treatment = comboBox_BoundaryTreat.SelectedIndex;
+            experimentParams.nwm = comboBox_WavesGenTreat.SelectedIndex;
+            if (experimentParams.nwm.Value != nwm.no_waves)
             {
-                experimentParams.nwm = nwm.fromIndex(comboBox_WavesGenTreat.SelectedIndex);
-                experimentParams.generator_time_wait = float.Parse(textBox_WavesGenTimeWait.Text);
-                experimentParams.wave_amp = float.Parse(textBox_WavesGenMagnitude.Text);
-                experimentParams.wave_length = float.Parse(textBox_WavesGenLen.Text);
+                experimentParams.nwm_wait = ParseFloat(textBox_WavesGenTimeWait.Text, "nwm_wait");
+                experimentParams.nwm_wave_magnitude = ParseFloat(textBox_WavesGenMagnitude.Text, "nwm_wave_magnitude");
+                experimentParams.nwm_wave_length = ParseFloat(textBox_WavesGenLen.Text, "nwm_wave_length");
             }
-            else
-            {
-                experimentParams.nwm = 0;
-                experimentParams.generator_time_wait = 0;
-                experimentParams.wave_amp = 0;
-                experimentParams.wave_length = 0;
-            }
-        }
-        void FillInBoundaries(ExperimentParams experimentParams)
-        {
-            experimentParams.use_chess_order = checkBox_BoundaryUseChessOrder.Checked;
-            if (comboBox_ParticlesGenerator.SelectedIndex == particle_generator.script)
-            {
-                experimentParams.boundary_layers_num = uint.Parse(textBox_BoundaryLayersNum.Text);
-                experimentParams.boundary_delta = 0;
-            }
-            else
-            {
-                experimentParams.boundary_delta = experimentParams.delta * float.Parse(textBox_BoundaryDelta.Text);
-                experimentParams.boundary_layers_num = 0;
-            }
-            experimentParams.sbt = (uint)comboBox_BoundaryTreat.SelectedIndex;
         }
         void FillInTimeIntegration(ExperimentParams experimentParams)
         {
-            experimentParams.dt_correction_method = (uint)comboBox_TimeTreat.SelectedIndex;
-            experimentParams.simulation_time = float.Parse(textBox_TimeSim.Text);
-            if (comboBox_TimeTreat.SelectedIndex == dt_method.const_value)
+            experimentParams.simulation_time = ParseFloat(textBox_TimeSim.Text, "simulation_time");
+            experimentParams.dt_correction_method = comboBox_TimeTreat.SelectedIndex;
+            if (experimentParams.dt_correction_method == dt_method.const_value)
             {
-                experimentParams.dt = float.Parse(textBox_TimeDT.Text);
-                experimentParams.CFL_coef = 0;
+                experimentParams.dt = ParseFloat(textBox_TimeDT.Text, "dt");
             }
             else
             {
-                experimentParams.dt = 0;
-                experimentParams.CFL_coef = float.Parse(textBox_TimeCFL.Text);
+                experimentParams.CFL_coef = ParseFloat(textBox_TimeCFL.Text, "CFL_coef");
             }
         }
         void FillInTimeStep(ExperimentParams experimentParams)
         {
-            experimentParams.print_time_est_step = uint.Parse(textBox_StepEstimate.Text);
+            bool enable_estimate = checkBox_StepEnableEstimate.Checked;
+            bool enable_dump = checkBox_StepEnableDump.Checked;
+            int step_treatment = comboBox_StepTreatment.SelectedIndex;
 
-            if (comboBox_StepTreatment.SelectedIndex == stepping_treatment.step)
+            experimentParams.step_treatment = step_treatment;
+
+            if (enable_estimate)
             {
-                experimentParams.dump_step = uint.Parse(textBox_StepDump.Text);
-                experimentParams.save_step = uint.Parse(textBox_StepSave.Text);
+                experimentParams.step_time_estimate = NullParseInt(textBox_StepEstimate.Text);
             }
-            else if (comboBox_TimeTreat.SelectedIndex == dt_method.const_value)
+
+            if (step_treatment == stepping_treatment.step)
             {
-                float dump_time = float.Parse(textBox_StepDump.Text);
-                float save_time = float.Parse(textBox_StepSave.Text);
-                float dt = float.Parse(textBox_TimeDT.Text);
-                experimentParams.dump_step = (uint)(dump_time / dt);
-                experimentParams.save_step = (uint)(save_time / dt);
+                experimentParams.save_step = ParseInt(textBox_StepSave.Text, "save_step");
+                if (enable_dump)
+                {
+                    experimentParams.dump_step = NullParseInt(textBox_StepDump.Text);
+                }
             }
-            else 
+            else
             {
-                experimentParams.dump_step = 0;
-                experimentParams.save_step = 0;
+                experimentParams.save_time = ParseFloat(textBox_StepSave.Text, "save_time");
+                if (enable_dump)
+                {
+                    experimentParams.dump_time = NullParseFloat(textBox_StepDump.Text);
+                }
             }
         }
         void FillInViscosity(ExperimentParams experimentParams)
         {
             experimentParams.visc = checkBox_EnableDynVisc.Checked;
-            if (experimentParams.visc)
+            if (experimentParams.visc.Value)
             {
-                experimentParams.water_dynamic_visc = float.Parse(textBox_DynViscValue.Text);
-            }
-            else
-            {
-                experimentParams.water_dynamic_visc = 0;
+                experimentParams.visc_coef = NullParseFloat(textBox_DynViscValue.Text);
             }
         }
-        void FillInCellScaleK(ExperimentParams experimentParams)
+        void FillInConsistency(ExperimentParams experimentParams)
         {
-            if (experimentParams.artificial_viscosity_skf == skf.gauss ||
-                experimentParams.average_velocity_skf == skf.gauss ||
-                experimentParams.density_skf == skf.gauss ||
-                experimentParams.int_force_skf == skf.gauss)
+            experimentParams.consistency_check = checkBox_ConsistencyCheck.Checked;
+            if (experimentParams.consistency_check.Value)
             {
-                experimentParams.cell_scale_k = 3;
-            }
-            else
-            {
-                experimentParams.cell_scale_k = 2;
+                experimentParams.consistency_treatment = comboBox_ConsistencyTreat.SelectedIndex;
+                experimentParams.consistency_check_step = NullParseInt(textBox_ConsistencyStep.Text);
             }
         }
         void FillInExtra(ExperimentParams experimentParams)
         {
-            experimentParams.enable_check_consistency = checkBox_ExtraCheckConsistency.Checked;
-            experimentParams.inf_stop = experimentParams.enable_check_consistency && checkBox_ExtraInconsistentStop.Checked;
-            experimentParams.normal_check_step = uint.Parse(textBox_StepCheck.Text);
-            experimentParams.local_threads = uint.Parse(textBox_ExtraLocalThreads.Text);
-            experimentParams.max_neighbours = uint.Parse(textBox_ExtraMaxNeighbours.Text);
-        }
-        void FillInDefaultParams(ExperimentParams experimentParams)
-        {
-            experimentParams.dim = 2;
-            experimentParams.TYPE_BOUNDARY = -2;
-            experimentParams.TYPE_NON_EXISTENT = 0;
-            experimentParams.TYPE_WATER = 2;
-            experimentParams.g = 9.8100004196167f;
-            experimentParams.pi = 3.1415927410125732f;
-
-            experimentParams.depth = 0;
-            experimentParams.beach_x = 0;
-            experimentParams.freq = 0;
-            experimentParams.nwm_particles_start = 0;
-            experimentParams.nwm_particles_end = 0;
-            experimentParams.local_threads = 0;
-            experimentParams.max_cells = 0;
-            experimentParams.maxn = 0;
-            experimentParams.nfluid = 0;
-            experimentParams.nvirt = 0;
-            experimentParams.ntotal = 0;
-            experimentParams.starttimestep = 0;
-            experimentParams.x_boundary_max = 0;
-            experimentParams.x_boundary_min = 0;
-            experimentParams.x_fluid_max = 0;
-            experimentParams.x_fluid_min = 0;
-            experimentParams.x_fluid_particles = 0;
-            experimentParams.x_maxgeom = 0;
-            experimentParams.y_maxgeom = 0;
-            experimentParams.y_boundary_max = 0;
-            experimentParams.y_boundary_min = 0;
-            experimentParams.y_fluid_min = 0;
-            experimentParams.y_fluid_max = 0;
-            experimentParams.y_fluid_particles = 0;
-            experimentParams.piston_amp = 0;
-            experimentParams.maxtimestep = 0;
-            experimentParams.wave_number = 0;
-        }
-        string GetParamsFileName()
-        {
-            string filename;
-
-            var target_particles_generator = comboBox_ParticlesGenerator.SelectedIndex;
-            if (target_particles_generator == particle_generator.pic_gec)
-            {
-                filename = "SPH2DPicGenParams.json";
-            }
-            else
-            {
-                filename = "Params.json";
-            }
-
-            return filename;
+            experimentParams.local_threads = NullParseInt(textBox_ExtraLocalThreads.Text);
+            experimentParams.max_neighbours = NullParseInt(textBox_ExtraMaxNeighbours.Text);
         }
         string FindExperimentDirectory(string directory)
         {
@@ -479,8 +401,8 @@ namespace SPH2DParamsGenerator
             if (index + 3 == directory.Length)
             {
                 string numberStr = directory.Substring(index + 1);
-                uint number;
-                if (uint.TryParse(numberStr, out number))
+                int number;
+                if (int.TryParse(numberStr, out number))
                 {
                     string nextExperimentName = directory.Substring(0, index + 1) + (number + 1).ToString("D2");
                     return FindExperimentDirectory(nextExperimentName);
@@ -493,28 +415,19 @@ namespace SPH2DParamsGenerator
         {
             var experimentParams = new ExperimentParams();
 
-            FillInDefaultParams(experimentParams);
             FillInArtificialViscosity(experimentParams);
             FillInAverageVelocity(experimentParams);
             FillInDensity(experimentParams);
             FillInInternalForce(experimentParams);
             FillInWavesGenerator(experimentParams);
-            FillInGeometry(experimentParams);
-            FillInBoundaries(experimentParams);
             FillInTimeStep(experimentParams);
             FillInTimeIntegration(experimentParams);
             FillInViscosity(experimentParams);
+            FillInConsistency(experimentParams);
             FillInExtra(experimentParams);
 
-            FillInCellScaleK(experimentParams);
-
-            experimentParams.experiment_name = textBox_ExperimentName.Text;
-            experimentParams.format_line = "";
-            experimentParams.version_major = TargetParamsVersionMajor;
-            experimentParams.version_minor = TargetParamsVersionMinor;
-            experimentParams.SPH2D_version_major = 0;
-            experimentParams.SPH2D_version_minor = 0;
-            experimentParams.SPH2D_version_patch = 0;
+            experimentParams.params_generator_version_major = Version.Major;
+            experimentParams.params_generator_version_minor = Version.Minor;
 
             return experimentParams;
         }
@@ -545,111 +458,110 @@ namespace SPH2DParamsGenerator
             }
             Directory.CreateDirectory(dir);
 
-            string path = Path.Combine(dir, GetParamsFileName());
+            string path = Path.Combine(dir, "ModelParams.json");
             using (var stream = File.OpenWrite(path))
             {
-                var options = new JsonSerializerOptions { WriteIndented = true };
-                experiment_params.experiment_name = textBox_ExperimentName.Text;
+                var options = new JsonSerializerOptions 
+                { 
+                    WriteIndented = true, 
+                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull 
+                };
                 JsonSerializer.Serialize(stream, experiment_params, options);
             }
         }
 
-        void LoadGeometry(ExperimentParams experimentParams)
-        {
-            textBox_GeomDelta.Text = experimentParams.delta.ToString();
-            textBox_GeomSmoothLen.Text = (experimentParams.hsml / experimentParams.delta).ToString();
-            textBox_GeomOriginX.Text = experimentParams.x_mingeom.ToString();
-            textBox_GeomOriginY.Text = experimentParams.y_mingeom.ToString();
-        }
         void LoadArtificialViscosity(ExperimentParams experimentParams)
         {
-            checkBox_EnableArtVisc.Checked = experimentParams.artificial_viscosity;
-            comboBox_ArtViscSKF.SelectedIndex = skf.toIndex(experimentParams.artificial_viscosity_skf);
-            textBox_ArtViscBulk.Text = experimentParams.artificial_bulk_visc.ToString();
-            textBox_ArtViscShear.Text = experimentParams.artificial_shear_visc.ToString();
+            checkBox_EnableArtVisc.Checked = experimentParams.artificial_viscosity ?? false;
+            comboBox_ArtViscSKF.SelectedIndex = skf.toIndex(experimentParams.artificial_viscosity_skf ?? skf.cubic);
+
+            textBox_ArtViscBulk.Text = experimentParams.artificial_bulk_visc?.ToString();
+            textBox_ArtViscShear.Text = experimentParams.artificial_shear_visc?.ToString();
         }
+
         void LoadAverageVelocity(ExperimentParams experimentParams)
         {
-            checkBox_EnableAvVel.Checked = experimentParams.average_velocity;
-            comboBox_AvVelSKF.SelectedIndex = skf.toIndex(experimentParams.average_velocity_skf);
-            textBox_AvVelCoef.Text = experimentParams.average_velocity_epsilon.ToString();
+            checkBox_EnableAvVel.Checked = experimentParams.average_velocity ?? false;
+
+            comboBox_AvVelSKF.SelectedIndex = skf.toIndex(experimentParams.average_velocity_skf ?? skf.cubic);
+            textBox_AvVelCoef.Text = experimentParams.average_velocity_coef?.ToString();
         }
         void LoadInternalForce(ExperimentParams experimentParams)
         {
-            comboBox_IntForceSKF.SelectedIndex = skf.toIndex(experimentParams.int_force_skf);
-            comboBox_IntForceTreat.SelectedIndex = pa_sph.toIndex(experimentParams.pa_sph);
-            comboBox_IntForceSoundVelMethod.SelectedIndex = (int)(experimentParams.eos_sound_vel_method);
+            comboBox_IntForceSKF.SelectedIndex = skf.toIndex(experimentParams.intf_skf ?? skf.cubic);
+            comboBox_IntForceTreat.SelectedIndex = pa_sph.toIndex(experimentParams.intf_sph_approximation ?? 2);
+            textBox_IntForceHsml.Text = (experimentParams.intf_hsml_coef ?? 1).ToString();
+            comboBox_IntForceSoundVelMethod.SelectedIndex = (experimentParams.eos_sound_vel_method);
             if (experimentParams.eos_sound_vel_method == eos_sound_vel_method.dam_break)
             {
-                textBox_IntForceSoundVel.Text = experimentParams.eos_csqr_k.ToString();
+                textBox_IntForceSoundVel.Text = experimentParams.eos_sound_vel_coef?.ToString();
             }
             else
             {
-                textBox_IntForceSoundVel.Text = experimentParams.eos_sound_vel.ToString();
+                textBox_IntForceSoundVel.Text = experimentParams.eos_sound_vel?.ToString();
             }
         }
         void LoadDensity(ExperimentParams experimentParams)
         {
-            if (experimentParams.summation_density)
+            comboBox_DensityTreat.SelectedIndex = experimentParams.density_treatment ?? density_method.continuity;
+            comboBox_DensitySKF.SelectedIndex = skf.toIndex(experimentParams.density_skf ?? skf.cubic);
+            if (experimentParams.density_normalization is int norm_density)
             {
-                comboBox_DensityTreat.SelectedIndex = density_method.summation;
+                checkBox_DensityNorm.Checked = norm_density == 1;
             }
             else
             {
-                comboBox_DensityTreat.SelectedIndex = density_method.continuity;
+                checkBox_DensityNorm.Checked = false;
             }
-
-            comboBox_DensitySKF.SelectedIndex = skf.toIndex(experimentParams.density_skf);
-            textBox_DensityValue.Text = experimentParams.rho0.ToString();
-            checkBox_DensityNorm.Checked = experimentParams.nor_density;
-        }
-        void LoadBoundaries(ExperimentParams experimentParams)
-        {
-            comboBox_BoundaryTreat.SelectedIndex = (int)experimentParams.sbt;
-            textBox_BoundaryDelta.Text = (experimentParams.boundary_delta / experimentParams.delta).ToString();
-            textBox_BoundaryLayersNum.Text = experimentParams.boundary_layers_num.ToString();
-            checkBox_BoundaryUseChessOrder.Checked = experimentParams.use_chess_order;
         }
         void LoadWavesGenerator(ExperimentParams experimentParams)
         {
-            checkBox_EnableWavesGen.Checked = experimentParams.waves_generator;
-            if (experimentParams.nwm == nwm.no_waves)
-            {
-                checkBox_EnableWavesGen.Checked = false;
-            }
-            else
-            {
-                comboBox_WavesGenTreat.SelectedIndex = nwm.toIndex(experimentParams.nwm);
-            }
-            textBox_WavesGenLen.Text = experimentParams.wave_length.ToString();
-            textBox_WavesGenMagnitude.Text = experimentParams.wave_amp.ToString();
-            textBox_WavesGenTimeWait.Text = experimentParams.generator_time_wait.ToString();
+            comboBox_WavesGenTreat.SelectedIndex = (experimentParams.nwm ?? nwm.no_waves);
+            textBox_WavesGenLen.Text = experimentParams.nwm_wave_length?.ToString();
+            textBox_WavesGenMagnitude.Text = experimentParams.nwm_wave_magnitude?.ToString();
+            textBox_WavesGenTimeWait.Text = experimentParams.nwm_wait?.ToString();
+            comboBox_BoundaryTreat.SelectedIndex = experimentParams.boundary_treatment;
         }
         void LoadDynamicViscosity(ExperimentParams experimentParams)
         {
-            checkBox_EnableDynVisc.Checked = experimentParams.visc;
-            textBox_DynViscValue.Text = experimentParams.water_dynamic_visc.ToString();
+            checkBox_EnableDynVisc.Checked = experimentParams.visc ?? false;
+            textBox_DynViscValue.Text = experimentParams.visc_coef?.ToString();
         }
         void LoadTimeIntegration(ExperimentParams experimentParams)
         {
-            comboBox_TimeTreat.SelectedIndex = (int)experimentParams.dt_correction_method;
-            textBox_TimeCFL.Text = experimentParams.CFL_coef.ToString();
-            textBox_TimeDT.Text = experimentParams.dt.ToString();
+            comboBox_TimeTreat.SelectedIndex = (experimentParams.dt_correction_method ?? dt_method.dynamic);
+            textBox_TimeCFL.Text = experimentParams.CFL_coef?.ToString();
+            textBox_TimeDT.Text = experimentParams.dt?.ToString();
             textBox_TimeSim.Text = experimentParams.simulation_time.ToString();
         }
         void LoadTimeStep(ExperimentParams experimentParams)
         {
-            textBox_StepSave.Text = experimentParams.save_step.ToString();
-            textBox_StepDump.Text = experimentParams.dump_step.ToString();
-            textBox_StepEstimate.Text = experimentParams.print_time_est_step.ToString();
-            textBox_StepCheck.Text = experimentParams.normal_check_step.ToString();
+            comboBox_StepTreatment.SelectedIndex = experimentParams.step_treatment ?? stepping_treatment.step;
+            if (experimentParams.step_treatment is int step_treatment)
+            {
+                if (step_treatment == stepping_treatment.step)
+                {
+                    textBox_StepSave.Text = experimentParams.save_step?.ToString();
+                    textBox_StepDump.Text = experimentParams.dump_step?.ToString();
+                }
+                else
+                {
+                    textBox_StepSave.Text = experimentParams.save_time?.ToString();
+                    textBox_StepDump.Text = experimentParams.dump_time?.ToString();
+                }
+            }
+            textBox_StepEstimate.Text = experimentParams.step_time_estimate?.ToString();
+        }
+        void LoadConsistency(ExperimentParams experimentParams)
+        {
+            checkBox_ConsistencyCheck.Checked = experimentParams.consistency_check ?? true;
+            textBox_ConsistencyStep.Text = (experimentParams.consistency_check_step ?? 1).ToString();
+            comboBox_ConsistencyTreat.SelectedIndex = experimentParams.consistency_treatment ?? consistency_treatment.stop;
         }
         void LoadExtra(ExperimentParams experimentParams)
         {
-            checkBox_ExtraCheckConsistency.Checked = experimentParams.enable_check_consistency;
-            checkBox_ExtraInconsistentStop.Checked = experimentParams.inf_stop;
-            textBox_ExtraLocalThreads.Text = experimentParams.local_threads.ToString();
-            textBox_ExtraMaxNeighbours.Text = experimentParams.max_neighbours.ToString();
+            textBox_ExtraLocalThreads.Text = experimentParams.local_threads?.ToString();
+            textBox_ExtraMaxNeighbours.Text = experimentParams.max_neighbours?.ToString();
         }
         void LoadTemplate(string filename)
         {
@@ -658,15 +570,15 @@ namespace SPH2DParamsGenerator
                 var experimentParams = JsonSerializer.Deserialize<ExperimentParams>(stream);
                 if (experimentParams != null)
                 {
-                    bool majorLess = experimentParams.version_major < TargetParamsVersionMajor;
-                    bool majorEqual = experimentParams.version_major == TargetParamsVersionMajor;
-                    bool minorLess = experimentParams.version_minor < TargetParamsVersionMinor;
+                    bool majorLess = experimentParams.params_generator_version_major < Version.Major;
+                    bool majorEqual = experimentParams.params_generator_version_major == Version.Major;
+                    bool minorLess = experimentParams.params_generator_version_minor < Version.Minor;
                     if (majorLess || (majorEqual && minorLess))
                     {
                         DialogResult result = MessageBox.Show(
-                            "Expected higher params version. Try to parse parameters anyway?", 
-                            "Warning", 
-                            MessageBoxButtons.YesNo, 
+                            "Expected higher params version. Try to parse parameters anyway?",
+                            "Warning",
+                            MessageBoxButtons.YesNo,
                             MessageBoxIcon.Warning);
 
                         if (result == DialogResult.No)
@@ -675,19 +587,16 @@ namespace SPH2DParamsGenerator
                         }
                     }
 
-                    LoadGeometry(experimentParams);
                     LoadArtificialViscosity(experimentParams);
                     LoadAverageVelocity(experimentParams);
                     LoadDensity(experimentParams);
                     LoadInternalForce(experimentParams);
-                    LoadBoundaries(experimentParams);
                     LoadWavesGenerator(experimentParams);
                     LoadDynamicViscosity(experimentParams);
                     LoadTimeIntegration(experimentParams);
                     LoadTimeStep(experimentParams);
+                    LoadConsistency(experimentParams);
                     LoadExtra(experimentParams);
-
-                    textBox_ExperimentName.Text = experimentParams.experiment_name;
                 }
             }
         }
@@ -696,17 +605,17 @@ namespace SPH2DParamsGenerator
         {
             string text = string.Empty;
 
-            if (experimentParams.nor_density == true)
+            if (experimentParams.density_normalization == density_normalization.basic)
             {
                 text = "density normalization";
             }
 
-            if (experimentParams.artificial_viscosity_skf == skf.quintic ||
-                experimentParams.average_velocity_skf == skf.quintic ||
-                experimentParams.density_skf == skf.quintic ||
-                experimentParams.int_force_skf == skf.quintic)
+            if (experimentParams.artificial_viscosity_skf == skf.qintic ||
+                experimentParams.average_velocity_skf == skf.qintic ||
+                experimentParams.density_skf == skf.qintic ||
+                experimentParams.intf_skf == skf.qintic)
             {
-                text = "quintic skf";
+                text = "qintic skf";
             }
 
             if (experimentParams.dt_correction_method == dt_method.dynamic)
@@ -714,21 +623,16 @@ namespace SPH2DParamsGenerator
                 text = "dynamic dt correction";
             }
 
-            if (experimentParams.stepping_treatment == stepping_treatment.time && 
+            if (experimentParams.step_treatment == stepping_treatment.time && 
                 experimentParams.dt_correction_method != dt_method.const_value)
             {
-                text = "time stepping treatment with CFL";
+                text = "time step treatment with CFL";
             }
 
             if (experimentParams.nwm == nwm.relaxation_zone ||
                 experimentParams.nwm == nwm.impulse)
             {
                 text = "waves generator";
-            }
-
-            if (experimentParams.use_chess_order && comboBox_ParticlesGenerator.SelectedIndex == particle_generator.pic_gec) 
-            {
-                text = "chess order with pic gen";
             }
 
             if (text == string.Empty)
@@ -774,8 +678,17 @@ namespace SPH2DParamsGenerator
 
         private void button_GenerateProject_Click(object sender, EventArgs e)
         {
-            var experiment_params = GenerateExperimentParams();
-            if (CheckNotImplemented(experiment_params) == false) return;
+            ExperimentParams experiment_params;
+            try
+            {
+                experiment_params = GenerateExperimentParams();
+                if (CheckNotImplemented(experiment_params) == false) return;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Params generation failed: " + ex.Message);
+                return;
+            }
 
             using (var dialog = new CommonOpenFileDialog())
             {
@@ -795,12 +708,6 @@ namespace SPH2DParamsGenerator
                     }
                 }
             }
-        }
-
-        private void comboBox_ParticlesGenerator_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateBoundaries();
-            UpdateGeometry();
         }
 
         private void button_OpenAsTemplate_Click(object sender, EventArgs e)
@@ -825,9 +732,9 @@ namespace SPH2DParamsGenerator
             }
         }
 
-        private void checkBox_ExtraCheckConsistency_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_ConsistencyCheck_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateExtra();
+            UpdateConsistency();
         }
 
         private void comboBox_IntForceSoundVelMethod_SelectedIndexChanged(object sender, EventArgs e)
@@ -841,6 +748,16 @@ namespace SPH2DParamsGenerator
         }
 
         private void comboBox_StepTreatment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateTimeStep();
+        }
+
+        private void checkBox_StepEnableEstimate_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateTimeStep();
+        }
+
+        private void checkBox_StepEnableDump_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTimeStep();
         }

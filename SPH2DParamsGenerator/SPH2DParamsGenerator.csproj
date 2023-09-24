@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Version.cs" />
     <EmbeddedResource Include="SPH2DParamsGeneratorForm.resx">
       <DependentUpon>SPH2DParamsGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
