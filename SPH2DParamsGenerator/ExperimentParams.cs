@@ -35,8 +35,8 @@ namespace SPH2DParamsGenerator
         public float wave_amp { get; set; }
         public float wave_number { get; set; }
         public float beach_x { get; set; }
-        public uint left_wall_start { get; set; }
-        public uint left_wall_end { get; set; }
+        public uint nwm_particles_start { get; set; }
+        public uint nwm_particles_end { get; set; }
         public float generator_time_wait { get; set; }
         public float CFL_coef { get; set; }
         public float dt { get; set; }
@@ -73,6 +73,7 @@ namespace SPH2DParamsGenerator
         public int TYPE_NON_EXISTENT { get; set; }
         public int TYPE_WATER { get; set; }
         public float mass { get; set; }
+        public float rho0 { get; set; }
         public bool enable_check_consistency { get; set; }
         public bool inf_stop { get; set; }
         public uint starttimestep { get; set; }
@@ -81,6 +82,7 @@ namespace SPH2DParamsGenerator
         public uint save_step { get; set; }
         public uint dump_step { get; set; }
         public uint print_time_est_step { get; set; }
+        public uint stepping_treatment { get; set; }
         public float pi { get; set; }
         public float g { get; set; }
         public string experiment_name { get; set; }

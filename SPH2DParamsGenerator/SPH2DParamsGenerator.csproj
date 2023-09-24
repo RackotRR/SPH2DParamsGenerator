@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="ExperimentParams.cs" />
     <Compile Include="SPH2DParamsGeneratorForm.cs">
       <SubType>Form</SubType>
