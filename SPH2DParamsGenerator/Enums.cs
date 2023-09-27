@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SPH2DParamsGenerator
 {
-    class pa_sph
+    class intf_sph_approximation
     {
-        public static int toIndex(int pa_sph) => pa_sph - 1;
+        public static int toIndex(int intf_sph_approximation) => intf_sph_approximation - 1;
         public static int fromIndex(int index) => index + 1;
     }
 
@@ -46,7 +46,7 @@ namespace SPH2DParamsGenerator
         public static int dynamic => 2;
     }
 
-    class stepping_treatment
+    class step_treatment
     {
         public static int step => 0;
         public static int time => 1;

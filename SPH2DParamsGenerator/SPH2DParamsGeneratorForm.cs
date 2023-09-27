@@ -189,7 +189,7 @@ namespace SPH2DParamsGenerator
         }
         void UpdateTimeStep()
         {
-            bool use_steps = comboBox_StepTreatment.SelectedIndex == stepping_treatment.step;
+            bool use_steps = comboBox_StepTreatment.SelectedIndex == step_treatment.step;
             if (use_steps)
             {
                 label_StepSave.Text = "Save step";
@@ -303,7 +303,7 @@ namespace SPH2DParamsGenerator
         {
             experimentParams.intf_hsml_coef = NullParseFloat(textBox_IntForceHsml.Text);
             experimentParams.intf_skf = skf.fromIndex(comboBox_IntForceSKF.SelectedIndex);
-            experimentParams.intf_sph_approximation = pa_sph.fromIndex(comboBox_IntForceTreat.SelectedIndex);
+            experimentParams.intf_sph_approximation = intf_sph_approximation.fromIndex(comboBox_IntForceTreat.SelectedIndex);
             experimentParams.eos_sound_vel_method = comboBox_IntForceSoundVelMethod.SelectedIndex;
             if (experimentParams.eos_sound_vel_method == eos_sound_vel_method.dam_break)
             {
@@ -321,6 +321,10 @@ namespace SPH2DParamsGenerator
             if (experimentParams.nwm.Value != nwm.no_waves)
             {
                 experimentParams.nwm_wait = ParseFloat(textBox_WavesGenTimeWait.Text, "nwm_wait");
+            }
+
+            if (experimentParams.nwm.Value != nwm.no_waves && experimentParams.nwm.Value != nwm.wall_disappear)
+            { 
                 experimentParams.nwm_wave_magnitude = ParseFloat(textBox_WavesGenMagnitude.Text, "nwm_wave_magnitude");
                 experimentParams.nwm_wave_length = ParseFloat(textBox_WavesGenLen.Text, "nwm_wave_length");
             }
@@ -342,16 +346,16 @@ namespace SPH2DParamsGenerator
         {
             bool enable_estimate = checkBox_StepEnableEstimate.Checked;
             bool enable_dump = checkBox_StepEnableDump.Checked;
-            int step_treatment = comboBox_StepTreatment.SelectedIndex;
+            int stepping_treatment = comboBox_StepTreatment.SelectedIndex;
 
-            experimentParams.step_treatment = step_treatment;
+            experimentParams.step_treatment = stepping_treatment;
 
             if (enable_estimate)
             {
                 experimentParams.step_time_estimate = NullParseInt(textBox_StepEstimate.Text);
             }
 
-            if (step_treatment == stepping_treatment.step)
+            if (stepping_treatment == step_treatment.step)
             {
                 experimentParams.save_step = ParseInt(textBox_StepSave.Text, "save_step");
                 if (enable_dump)
@@ -431,34 +435,8 @@ namespace SPH2DParamsGenerator
 
             return experimentParams;
         }
-        void GenerateProject(string directory, ExperimentParams experiment_params)
+        void GenerateProject(string path, ExperimentParams experiment_params)
         {
-            string dir = Path.Combine(directory, textBox_ExperimentName.Text);
-            if (Directory.Exists(dir))
-            {
-                DialogResult result = MessageBox.Show(
-                    "Experiment directory already exists. Override experiment?", 
-                    "Warning", 
-                    MessageBoxButtons.YesNoCancel, 
-                    MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Cancel)
-                {
-                    return;
-                }
-                else if (result == DialogResult.Yes)
-                {
-                    Directory.Delete(dir, true);
-                }
-                else if (result == DialogResult.No)
-                {
-                    dir = FindExperimentDirectory(dir);
-                    textBox_ExperimentName.Text = Path.GetFileName(dir);
-                }
-            }
-            Directory.CreateDirectory(dir);
-
-            string path = Path.Combine(dir, "ModelParams.json");
             using (var stream = File.OpenWrite(path))
             {
                 var options = new JsonSerializerOptions 
@@ -489,7 +467,7 @@ namespace SPH2DParamsGenerator
         void LoadInternalForce(ExperimentParams experimentParams)
         {
             comboBox_IntForceSKF.SelectedIndex = skf.toIndex(experimentParams.intf_skf ?? skf.cubic);
-            comboBox_IntForceTreat.SelectedIndex = pa_sph.toIndex(experimentParams.intf_sph_approximation ?? 2);
+            comboBox_IntForceTreat.SelectedIndex = intf_sph_approximation.toIndex(experimentParams.intf_sph_approximation ?? 2);
             textBox_IntForceHsml.Text = (experimentParams.intf_hsml_coef ?? 1).ToString();
             comboBox_IntForceSoundVelMethod.SelectedIndex = (experimentParams.eos_sound_vel_method);
             if (experimentParams.eos_sound_vel_method == eos_sound_vel_method.dam_break)
@@ -536,10 +514,10 @@ namespace SPH2DParamsGenerator
         }
         void LoadTimeStep(ExperimentParams experimentParams)
         {
-            comboBox_StepTreatment.SelectedIndex = experimentParams.step_treatment ?? stepping_treatment.step;
-            if (experimentParams.step_treatment is int step_treatment)
+            comboBox_StepTreatment.SelectedIndex = experimentParams.step_treatment ?? step_treatment.step;
+            if (experimentParams.step_treatment is int stepping_treatment)
             {
-                if (step_treatment == stepping_treatment.step)
+                if (stepping_treatment == step_treatment.step)
                 {
                     textBox_StepSave.Text = experimentParams.save_step?.ToString();
                     textBox_StepDump.Text = experimentParams.dump_step?.ToString();
@@ -623,7 +601,7 @@ namespace SPH2DParamsGenerator
                 text = "dynamic dt correction";
             }
 
-            if (experimentParams.step_treatment == stepping_treatment.time && 
+            if (experimentParams.step_treatment == step_treatment.time && 
                 experimentParams.dt_correction_method != dt_method.const_value)
             {
                 text = "time step treatment with CFL";
@@ -690,14 +668,12 @@ namespace SPH2DParamsGenerator
                 return;
             }
 
-            using (var dialog = new CommonOpenFileDialog())
+            using (var dialog = new SaveFileDialog())
             {
-                dialog.InitialDirectory = LastFolderOpened ?? Directory.GetCurrentDirectory();
-                dialog.IsFolderPicker = true;
+                dialog.RestoreDirectory = true;
                 var result = dialog.ShowDialog();
-                if (result == CommonFileDialogResult.Ok && !string.IsNullOrWhiteSpace(dialog.FileName))
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.FileName))
                 {
-                    LastFolderOpened = dialog.FileName;
                     try
                     {
                         GenerateProject(dialog.FileName, experiment_params);

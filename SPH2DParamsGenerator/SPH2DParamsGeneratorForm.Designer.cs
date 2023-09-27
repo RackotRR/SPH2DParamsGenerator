@@ -103,13 +103,11 @@
             this.textBox_ExtraLocalThreads = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.checkBox_ConsistencyCheck = new System.Windows.Forms.CheckBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.textBox_ExperimentName = new System.Windows.Forms.TextBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.button_OpenAsTemplate = new System.Windows.Forms.Button();
-            this.comboBox_ConsistencyTreat = new System.Windows.Forms.ComboBox();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_ConsistencyTreat = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -758,11 +756,11 @@
             // 
             // button_GenerateProject
             // 
-            this.button_GenerateProject.Location = new System.Drawing.Point(0, 141);
+            this.button_GenerateProject.Location = new System.Drawing.Point(0, 118);
             this.button_GenerateProject.Name = "button_GenerateProject";
-            this.button_GenerateProject.Size = new System.Drawing.Size(129, 62);
+            this.button_GenerateProject.Size = new System.Drawing.Size(129, 85);
             this.button_GenerateProject.TabIndex = 36;
-            this.button_GenerateProject.Text = "Generate project";
+            this.button_GenerateProject.Text = "Save model params";
             this.button_GenerateProject.UseVisualStyleBackColor = true;
             this.button_GenerateProject.Click += new System.EventHandler(this.button_GenerateProject_Click);
             // 
@@ -824,35 +822,26 @@
             this.checkBox_ConsistencyCheck.UseVisualStyleBackColor = true;
             this.checkBox_ConsistencyCheck.CheckedChanged += new System.EventHandler(this.checkBox_ConsistencyCheck_CheckedChanged);
             // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(6, 24);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(88, 13);
-            this.label34.TabIndex = 41;
-            this.label34.Text = "Experiment name";
-            // 
-            // textBox_ExperimentName
-            // 
-            this.textBox_ExperimentName.Location = new System.Drawing.Point(4, 40);
-            this.textBox_ExperimentName.Name = "textBox_ExperimentName";
-            this.textBox_ExperimentName.Size = new System.Drawing.Size(117, 20);
-            this.textBox_ExperimentName.TabIndex = 36;
-            this.textBox_ExperimentName.Text = "default_experiment";
-            // 
             // groupBox12
             // 
             this.groupBox12.Controls.Add(this.button_GenerateProject);
             this.groupBox12.Controls.Add(this.button_OpenAsTemplate);
-            this.groupBox12.Controls.Add(this.textBox_ExperimentName);
-            this.groupBox12.Controls.Add(this.label34);
             this.groupBox12.Location = new System.Drawing.Point(554, 255);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(129, 203);
             this.groupBox12.TabIndex = 42;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Experiment";
+            // 
+            // button_OpenAsTemplate
+            // 
+            this.button_OpenAsTemplate.Location = new System.Drawing.Point(0, 23);
+            this.button_OpenAsTemplate.Name = "button_OpenAsTemplate";
+            this.button_OpenAsTemplate.Size = new System.Drawing.Size(129, 92);
+            this.button_OpenAsTemplate.TabIndex = 39;
+            this.button_OpenAsTemplate.Text = "Open as template";
+            this.button_OpenAsTemplate.UseVisualStyleBackColor = true;
+            this.button_OpenAsTemplate.Click += new System.EventHandler(this.button_OpenAsTemplate_Click);
             // 
             // groupBox13
             // 
@@ -868,24 +857,6 @@
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Consistency";
             // 
-            // button_OpenAsTemplate
-            // 
-            this.button_OpenAsTemplate.Location = new System.Drawing.Point(0, 73);
-            this.button_OpenAsTemplate.Name = "button_OpenAsTemplate";
-            this.button_OpenAsTemplate.Size = new System.Drawing.Size(129, 62);
-            this.button_OpenAsTemplate.TabIndex = 39;
-            this.button_OpenAsTemplate.Text = "Open project";
-            this.button_OpenAsTemplate.UseVisualStyleBackColor = true;
-            this.button_OpenAsTemplate.Click += new System.EventHandler(this.button_OpenAsTemplate_Click);
-            // 
-            // comboBox_ConsistencyTreat
-            // 
-            this.comboBox_ConsistencyTreat.FormattingEnabled = true;
-            this.comboBox_ConsistencyTreat.Location = new System.Drawing.Point(4, 62);
-            this.comboBox_ConsistencyTreat.Name = "comboBox_ConsistencyTreat";
-            this.comboBox_ConsistencyTreat.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_ConsistencyTreat.TabIndex = 40;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -894,6 +865,14 @@
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 40;
             this.label1.Text = "Treatment";
+            // 
+            // comboBox_ConsistencyTreat
+            // 
+            this.comboBox_ConsistencyTreat.FormattingEnabled = true;
+            this.comboBox_ConsistencyTreat.Location = new System.Drawing.Point(4, 62);
+            this.comboBox_ConsistencyTreat.Name = "comboBox_ConsistencyTreat";
+            this.comboBox_ConsistencyTreat.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_ConsistencyTreat.TabIndex = 40;
             // 
             // SPH2DParamsGeneratorForm
             // 
@@ -934,7 +913,6 @@
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             this.ResumeLayout(false);
@@ -1015,8 +993,6 @@
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.TextBox textBox_ExtraLocalThreads;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox textBox_ExperimentName;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.CheckBox checkBox_ConsistencyCheck;
         private System.Windows.Forms.Label label_IntForceSoundVelCoef;
