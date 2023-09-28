@@ -437,12 +437,13 @@ namespace SPH2DParamsGenerator
         }
         void GenerateProject(string path, ExperimentParams experiment_params)
         {
+            path = Path.Combine(path, "ModelParams.json");
             using (var stream = File.OpenWrite(path))
             {
-                var options = new JsonSerializerOptions 
-                { 
-                    WriteIndented = true, 
-                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull 
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
                 };
                 JsonSerializer.Serialize(stream, experiment_params, options);
             }
@@ -668,11 +669,12 @@ namespace SPH2DParamsGenerator
                 return;
             }
 
-            using (var dialog = new SaveFileDialog())
+            using (var dialog = new CommonOpenFileDialog())
             {
                 dialog.RestoreDirectory = true;
+                dialog.IsFolderPicker = true;
                 var result = dialog.ShowDialog();
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.FileName))
+                if (result == CommonFileDialogResult.Ok && !string.IsNullOrWhiteSpace(dialog.FileName))
                 {
                     try
                     {
