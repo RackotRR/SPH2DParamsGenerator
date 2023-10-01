@@ -41,6 +41,8 @@ namespace SPH2DParamsGenerator
         public float? save_time { get; set; }
         public float? dump_time { get; set; }
         public int? step_time_estimate { get; set; }
+        public bool? use_dump { get; set; }
+        public bool? use_custom_time_estimate_step { get; set; }
 
         public bool? consistency_check { get; set; }
         public int? consistency_check_step { get; set; }

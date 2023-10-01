@@ -352,6 +352,7 @@ namespace SPH2DParamsGenerator
 
             if (enable_estimate)
             {
+                experimentParams.use_custom_time_estimate_step = true;
                 experimentParams.step_time_estimate = NullParseInt(textBox_StepEstimate.Text);
             }
 
@@ -360,6 +361,7 @@ namespace SPH2DParamsGenerator
                 experimentParams.save_step = ParseInt(textBox_StepSave.Text, "save_step");
                 if (enable_dump)
                 {
+                    experimentParams.use_dump = true;
                     experimentParams.dump_step = NullParseInt(textBox_StepDump.Text);
                 }
             }
@@ -368,6 +370,7 @@ namespace SPH2DParamsGenerator
                 experimentParams.save_time = ParseFloat(textBox_StepSave.Text, "save_time");
                 if (enable_dump)
                 {
+                    experimentParams.use_dump = true;
                     experimentParams.dump_time = NullParseFloat(textBox_StepDump.Text);
                 }
             }
