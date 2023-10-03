@@ -441,7 +441,7 @@ namespace SPH2DParamsGenerator
         void GenerateProject(string path, ExperimentParams experiment_params)
         {
             path = Path.Combine(path, "ModelParams.json");
-            using (var stream = File.OpenWrite(path))
+            using (var stream = File.Create(path))
             {
                 var options = new JsonSerializerOptions
                 {
